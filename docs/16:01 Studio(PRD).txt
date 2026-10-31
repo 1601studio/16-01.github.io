@@ -1,0 +1,1200 @@
+# 16:01 Studio
+## Product Requirements Document (PRD)
+
+**Product Name:** 16:01 Studio  
+**Product Type:** Graphic Design & Illustration Portfolio Website  
+**Version:** 1.0  
+**Status:** Initial Specification  
+**Website:** https://saelvostudio.github.io/  
+**Target Audience:** Potential clients, creative agencies, art directors, and creative professionals  
+**Hosting:** GitHub Pages  
+**Budget:** ₹0  
+**Core Technologies:** HTML5, CSS3, and JavaScript
+
+---
+
+# 1. Product Overview
+
+## 1.1 Vision
+
+16:01 Studio is a premium personal portfolio website showcasing graphic design, illustration, printing art and visual communication work through a distinctive, modern, editorial digital experience.
+
+The website must communicate creativity, professionalism, and strong visual identity while presenting projects in an engaging, organized, and accessible manner.
+
+It must not resemble a generic portfolio template. Instead, it should feel like an independent creative studio with carefully art-directed layouts, bold typography, high-quality artwork, and purposeful interactions.
+
+## 1.2 Product Objective
+
+Create a professional portfolio website that:
+
+- Establishes a recognizable creative identity.
+- Showcases graphic design and illustration projects.
+- Presents detailed project case studies.
+- Communicates the designer's skills and services.
+- Encourages professional inquiries and collaborations.
+- Provides an excellent experience across desktop, tablet, and mobile devices.
+- Allows new projects to be added without rebuilding the entire website.
+- Remains free to host and maintain using GitHub Pages.
+
+## 1.3 Core Principle
+
+**The artwork is the hero. The interface exists to make the artwork more compelling.**
+
+Typography, layout, color, animation, and interactions must support the creative work rather than compete with it.
+
+---
+
+# 2. Target Audience
+
+## 2.1 Potential Clients
+
+Businesses, entrepreneurs, and individuals looking for graphic design, branding, or illustration services.
+
+Their primary needs are to evaluate the quality of the work, understand available services, and contact the designer.
+
+## 2.2 Creative Agencies
+
+Agencies seeking freelance designers, illustrators, or creative collaborators.
+
+They need to review project quality, assess design versatility, and understand the designer's contribution.
+
+## 2.3 Art Directors and Creative Professionals
+
+Professionals evaluating the designer for commissions, collaborations, and creative opportunities.
+
+They need access to detailed projects that demonstrate visual thinking, execution, and consistency.
+
+## 2.4 Creative Community
+
+Designers, illustrators, and other visitors interested in the designer's creative work and visual style.
+
+---
+
+# 3. Product Goals
+
+The website must achieve the following goals.
+
+### G1 — Establish Brand Identity
+Create a memorable and consistent visual identity for 16:01 Studio.
+
+### G2 — Showcase Creative Work
+Present projects with appropriate image quality, clear hierarchy, and professional context.
+
+### G3 — Support Multiple Disciplines
+Accommodate graphic design, branding, illustration, poster design, typography, and other relevant creative work.
+
+### G4 — Encourage Professional Inquiries
+Make contact information and inquiry pathways easy to find.
+
+### G5 — Deliver Excellent Usability
+Ensure intuitive navigation, responsive layouts, and accessible interactions.
+
+### G6 — Remain Easy to Maintain
+Allow the designer to add projects, update images, and edit content using a simple file-based workflow.
+
+### G7 — Maintain Zero Hosting Cost
+Use GitHub Pages and free development tools without requiring paid hosting or a backend.
+
+---
+
+# 4. Brand Identity and Visual Direction
+
+## 4.1 Brand Name
+
+16:01 Studio
+
+## 4.2 Professional Title
+
+Graphic Designer & Illustrator
+
+## 4.3 Brand Personality
+
+The visual identity should communicate:
+
+- Creativity.
+- Confidence.
+- Precision.
+- Independence.
+- Contemporary design.
+- Editorial sophistication.
+- Visual experimentation.
+- Professionalism.
+
+## 4.4 Visual Design Direction
+
+The website should combine:
+
+- Minimalist composition.
+- Bold editorial typography.
+- Strong visual hierarchy.
+- Generous whitespace.
+- Large-scale artwork.
+- Carefully controlled asymmetry.
+- Restrained color usage.
+- Subtle transitions.
+- Consistent spacing and alignment.
+
+Avoid generic gradients, unnecessary decorative elements, excessive rounded cards, and animations that distract from the artwork.
+
+## 4.5 Color Palette
+
+The initial color palette is:
+
+| Color | Hex Value | Purpose |
+|---|---|---|
+| Dark background | `#111310` | Primary canvas |
+| Primary text/warm off-white | `#F5F2EB` | Headlines and body text |
+| Dark black | `#111111` | Selected sections |
+| Warm gray secondary | `#B0ADA5` | Supporting information |
+| Burnt red accent | `#C64B35` | Highlights and interactive details |
+| Dark gray border | `#34352F` | Dividers and outlines |
+| White | `#FFFFFF` | Selected image surfaces |
+
+The palette may be refined during visual design, provided the overall identity remains consistent and text contrast is sufficient.
+
+## 4.6 Typography
+
+The typography system should include:
+
+- Bold display typography for primary headlines.
+- A highly readable sans-serif for body text.
+- Clear differentiation between headings and supporting information.
+- Compact, legible project metadata.
+- Optional expressive serif typography for selected editorial elements.
+
+Fonts must have appropriate licenses and reliable fallback options.
+
+## 4.7 Layout Principles
+
+- Use a consistent content grid.
+- Maintain generous margins and spacing.
+- Allow project layouts to vary according to the artwork.
+- Preserve image proportions unless intentional cropping is required.
+- Use large images for important projects.
+- Avoid unnecessary visual clutter.
+- Maintain consistency across pages without making every section identical.
+
+---
+
+# 5. Website Structure
+
+The website must include the following pages or sections.
+
+| Page | Purpose | Priority |
+|---|---|---|
+| Home | Introduce the studio and highlight selected projects | P0 |
+| Work / Projects | Display the complete portfolio | P0 |
+| Project Case Study | Present an individual project in detail | P0 |
+| About | Introduce the designer and creative approach | P1 |
+| Services | Explain available design services | P1 |
+| Contact | Provide a clear contact method | P0 |
+| Custom 404 | Help visitors recover from invalid URLs | P2 |
+
+**Priority definitions:**
+
+- **P0:** Required for the initial launch.
+- **P1:** Important for the complete initial experience.
+- **P2:** Optional enhancement after the core website is functional.
+
+The About, Services, and Contact content may initially be integrated into the homepage if navigation remains clear.
+
+---
+
+# 6. Functional Requirements
+
+## 6.1 Header and Navigation
+
+The header must include:
+
+- 16:01 Studio wordmark or logo.
+- Work navigation.
+- About navigation.
+- Services navigation.
+- Contact navigation.
+
+An availability indicator may be included if appropriate.
+
+### Requirements
+
+- All navigation links must work.
+- The active page or section should be identifiable.
+- Hover and keyboard-focus states must be visible.
+- Navigation must adapt to mobile screens.
+- A mobile menu must be keyboard-accessible.
+- Navigation must not obstruct the main content.
+
+## 6.2 Homepage
+
+**Priority: P0**
+
+The homepage must establish the brand and guide visitors toward the portfolio.
+
+### Section 1: Hero
+
+Include:
+
+- Brand identity.
+- Professional title.
+- Distinctive headline.
+- Short introduction.
+- Primary CTA: View Work.
+- Secondary CTA: About or Contact.
+- Optional featured illustration or visual composition.
+
+The hero must communicate the designer's identity immediately.
+
+### Section 2: Selected Projects
+
+Display approximately four to six selected projects.
+
+Each project preview should include:
+
+- Project artwork.
+- Project title.
+- Category.
+- Optional year.
+- Optional short description.
+- Link to the project case study.
+
+Project layouts may vary in size and arrangement.
+
+### Section 3: Creative Introduction
+
+Introduce the designer's approach to visual communication.
+
+Include a concise statement about the creative practice and a link to the About page or section.
+
+### Section 4: Capabilities
+
+Present relevant creative disciplines, such as:
+
+- Graphic Design.
+- Brand Identity.
+- Vector Illustration.
+- Poster Design.
+- Typography.
+- Digital Illustration.
+
+Only genuine capabilities should be displayed.
+
+### Section 5: Featured Project
+
+Highlight one substantial project using:
+
+- Large artwork.
+- Project title.
+- Category.
+- Short introduction.
+- Link to the complete case study.
+
+### Section 6: Contact CTA
+
+Include a clear invitation for inquiries and collaborations.
+
+### Homepage Acceptance Criteria
+
+- Brand identity is immediately recognizable.
+- Primary navigation works.
+- The View Work CTA leads to the portfolio.
+- Project links lead to valid destinations.
+- Artwork displays correctly.
+- The layout adapts to mobile devices.
+- Essential information remains available without animations.
+
+## 6.3 Work / Projects Page
+
+**Priority: P0**
+
+The Work page must allow visitors to browse projects efficiently.
+
+### Required Elements
+
+- Page title.
+- Introductory text.
+- Category filters.
+- Responsive project grid.
+- Project titles and categories.
+- Links to individual case studies.
+
+### Suggested Categories
+
+- All Work.
+- Graphic Design.
+- Branding.
+- Illustration.
+- Posters.
+- Typography.
+- Merchandise.
+
+Only categories containing published projects should appear.
+
+### Filtering Behavior
+
+When a category is selected:
+
+1. The selected filter must become visually identifiable.
+2. Matching projects must remain visible.
+3. Nonmatching projects must be hidden.
+4. The layout must update correctly.
+5. The All Work filter must restore every published project.
+6. Filtering must work with a keyboard.
+
+Filtering should use lightweight JavaScript without requiring a backend.
+
+## 6.4 Project Case Study Page
+
+**Priority: P0**
+
+Every project must support a detailed presentation using a reusable page structure.
+
+### Required Content
+
+- Project title.
+- Category.
+- Project summary.
+- Main artwork.
+- Project context.
+- Creative approach.
+- Designer's role.
+- Additional images when available.
+- Related projects.
+- Contact CTA.
+
+### Optional Content
+
+Depending on the project, the page may include:
+
+- Logo variations.
+- Brand identity applications.
+- Typography systems.
+- Illustration details.
+- Sketches and development.
+- Poster compositions.
+- Packaging mockups.
+- Merchandise applications.
+- Color palettes.
+- Final design applications.
+- Before-and-after comparisons.
+
+Not every project requires every section.
+
+### Image Requirements
+
+- Preserve original aspect ratios unless a deliberate crop is specified.
+- Use appropriate image resolutions.
+- Avoid visibly pixelated images.
+- Provide descriptive alternative text.
+- Support large-scale artwork presentation.
+- Maintain suitable spacing between images.
+
+### Navigation
+
+Provide links to:
+
+- The complete portfolio.
+- Related projects.
+- Previous and next projects, when practical.
+- Contact information.
+
+## 6.5 About Page
+
+**Priority: P1**
+
+The About page must introduce the designer professionally.
+
+### Required Content
+
+- Short biography.
+- Creative philosophy.
+- Main design disciplines.
+- Relevant skills.
+- Software and tools.
+- Contact CTA.
+
+An optional portrait or studio image may be included.
+
+Do not invent qualifications, employment history, clients, awards, or professional achievements.
+
+## 6.6 Services Page
+
+**Priority: P1**
+
+The Services page must explain the designer's actual offerings.
+
+Potential services include:
+
+- Logo Design.
+- Brand Identity.
+- Graphic Design.
+- Vector Illustration.
+- Poster Design.
+- Typography and Lettering.
+- Merchandise Graphics.
+- Custom Illustration.
+
+Each service may include a description, deliverables, relevant project examples, and an inquiry CTA.
+
+Only services the designer can genuinely provide should be published.
+
+## 6.7 Contact Page or Section
+
+**Priority: P0**
+
+The Contact page must provide at least one working contact method.
+
+### Required Elements
+
+- Contact heading.
+- Short invitation.
+- Verified email address or another real contact method.
+- Optional verified social links.
+
+A direct email link is sufficient for the initial release.
+
+A contact form may be added only if a working submission mechanism is configured and tested.
+
+A form must never appear functional if it cannot actually submit messages.
+
+## 6.8 Custom 404 Page
+
+**Priority: P2**
+
+The custom 404 page should:
+
+- Explain that the page could not be found.
+- Match the visual identity.
+- Provide a link to the homepage.
+- Provide a link to the portfolio.
+
+---
+
+# 7. Project Content Requirements
+
+Project content should be organized so that adding new projects does not require rebuilding the entire website.
+
+## 7.1 Project Data Fields
+
+Each project should support:
+
+| Field | Description |
+|---|---|
+| ID | Unique project identifier |
+| Slug | URL-friendly project identifier |
+| Title | Project name |
+| Category | Primary project category |
+| Categories | Additional applicable categories |
+| Year | Project year, when relevant |
+| Thumbnail | Project preview image |
+| Hero Image | Main case-study image |
+| Alt Text | Descriptive image alternative |
+| Summary | Short project description |
+| Role | Designer's contribution |
+| Featured | Whether to feature the project |
+| Published | Whether the project is publicly visible |
+| Sections | Flexible case-study content |
+
+## 7.2 Project Content Management
+
+The initial website does not require a content-management system.
+
+Projects may be managed using JavaScript data files and individual HTML case-study pages.
+
+Adding a project should involve:
+
+1. Preparing and optimizing the artwork.
+2. Adding image files to the assets directory.
+3. Adding the project information.
+4. Creating or updating the case-study page.
+5. Testing links and image paths.
+6. Publishing the changes.
+
+The process must be documented in the project README.
+
+---
+
+# 8. Motion and Interaction Requirements
+
+Motion should enhance the presentation without distracting from the work.
+
+## 8.1 Required Motion
+
+- Subtle hero entrance.
+- Selected scroll-reveal effects.
+- Restrained project hover interactions.
+- Navigation hover transitions.
+- Clear button feedback.
+- Smooth category-filter interactions.
+- Optional subtle image transitions.
+
+## 8.2 Optional Advanced Motion
+
+After the core website is complete, optional enhancements may include:
+
+- Subtle parallax.
+- Image reveal masks.
+- Project-specific transitions.
+- Carefully controlled horizontal galleries.
+- Interactive illustration details.
+- Desktop cursor-following effects.
+
+These features must remain optional.
+
+## 8.3 Motion Restrictions
+
+- Respect reduced-motion preferences.
+- Do not force scrolling.
+- Do not block navigation.
+- Do not hide essential content until animations complete.
+- Avoid excessive parallax.
+- Avoid unnecessary cursor replacement.
+- Keep mobile interactions simple.
+- Do not sacrifice performance for visual effects.
+
+All essential website content must remain accessible when animations are disabled.
+
+---
+
+# 9. Responsive Design Requirements
+
+The website must support mobile phones, tablets, laptops, and desktop monitors.
+
+## 9.1 Suggested Breakpoints
+
+| Device | Approximate Width |
+|---|---|
+| Small mobile | 320–374 px |
+| Mobile | 375–767 px |
+| Tablet | 768–1023 px |
+| Desktop | 1024–1439 px |
+| Large desktop | 1440 px and above |
+
+These values are starting points and should be adjusted according to the actual design.
+
+## 9.2 Mobile Requirements
+
+- Mobile-friendly navigation.
+- Readable typography.
+- Comfortable touch targets.
+- Appropriate project-grid layout.
+- No unintended horizontal overflow.
+- Proper image scaling.
+- Adequate spacing.
+- No hover-only functionality.
+
+## 9.3 Tablet Requirements
+
+- Flexible project layouts.
+- Balanced image and text proportions.
+- Appropriate navigation.
+- Efficient use of available space.
+
+## 9.4 Desktop Requirements
+
+- Large artwork presentation.
+- Expressive editorial compositions.
+- Strong typographic hierarchy.
+- Subtle hover effects.
+- Consistent content alignment.
+- Controlled maximum content width.
+
+## 9.5 Acceptance Criteria
+
+No supported screen size should exhibit unintended horizontal scrolling, overlapping navigation, clipped essential text, or inaccessible controls.
+
+---
+
+# 10. Technical Requirements
+
+## 10.1 Technology Stack
+
+The initial implementation must use:
+
+- HTML5.
+- CSS3.
+- Vanilla JavaScript.
+- Git.
+- GitHub.
+- GitHub Pages.
+
+A JavaScript framework is not required.
+
+The website should avoid unnecessary dependencies and build tools.
+
+## 10.2 Hosting Requirements
+
+The website must:
+
+- Work on GitHub Pages.
+- Use the configured repository and deployment settings.
+- Avoid backend requirements.
+- Avoid database dependencies.
+- Avoid runtime secrets.
+- Use correct asset paths.
+- Work after a fresh deployment.
+
+**Target URL:** `https://saelvostudio.github.io/`
+
+## 10.3 Suggested File Structure
+
+```text
+saelvostudio/
+├── index.html
+├── work.html
+├── about.html
+├── services.html
+├── contact.html
+├── 404.html
+│
+├── projects/
+│   ├── example-branding.html
+│   ├── example-illustration.html
+│   └── example-poster.html
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── css/
+│   ├── reset.css
+│   ├── variables.css
+│   ├── global.css
+│   ├── components.css
+│   ├── layout.css
+│   ├── pages.css
+│   └── responsive.css
+│
+├── js/
+│   ├── main.js
+│   ├── navigation.js
+│   ├── project-filter.js
+│   └── motion.js
+│
+├── data/
+│   └── projects.js
+│
+├── README.md
+└── robots.txt
+```
+
+This structure is a recommendation rather than a requirement to create every file. The implementation should remain as simple as possible while supporting the required functionality.
+
+## 10.4 Code Quality
+
+- Use semantic HTML.
+- Maintain organized CSS.
+- Use consistent naming conventions.
+- Avoid duplicate styles.
+- Avoid unnecessary inline JavaScript.
+- Keep code readable and maintainable.
+- Separate project content from shared layouts where practical.
+- Document non-obvious behavior.
+- Avoid unnecessary libraries.
+
+## 10.5 Browser Compatibility
+
+Support current stable versions of Chrome, Edge, Firefox, and Safari on desktop and mobile.
+
+Core content must remain usable if optional visual effects are unsupported.
+
+---
+
+# 11. Image and Asset Requirements
+
+## 11.1 Image Quality
+
+- Use appropriate source resolutions.
+- Optimize images before uploading.
+- Preserve artwork quality.
+- Avoid unnecessary enlargement of low-resolution assets.
+- Generate suitable thumbnails.
+- Use descriptive filenames.
+- Maintain intended image proportions.
+
+## 11.2 Recommended Formats
+
+- WebP or AVIF for suitable photographic and raster artwork.
+- PNG for images requiring transparency.
+- SVG for suitable vector illustrations, logos, and icons.
+- WOFF2 for self-hosted web fonts where applicable.
+
+## 11.3 Loading Strategy
+
+- Lazy-load images below the initial viewport.
+- Prioritize the main hero image.
+- Specify image dimensions or aspect ratios.
+- Avoid loading full-size case-study assets unnecessarily on the homepage.
+- Use responsive images when beneficial.
+
+## 11.4 Licensing
+
+Only publish artwork, fonts, mockups, and other assets that the designer is authorized to use.
+
+Respect applicable licenses and client confidentiality requirements.
+
+---
+
+# 12. Accessibility Requirements
+
+The website should follow WCAG 2.2 Level AA principles wherever practical.
+
+Required practices include:
+
+- Semantic HTML landmarks.
+- Logical heading hierarchy.
+- Meaningful image alternative text.
+- Sufficient text contrast.
+- Keyboard-accessible navigation.
+- Visible focus indicators.
+- Descriptive control labels.
+- Reduced-motion support.
+- Appropriate touch-target sizes.
+- No essential hover-only interactions.
+- No essential information communicated solely through color.
+
+Accessibility must be reviewed through manual testing and automated checks.
+
+---
+
+# 13. SEO Requirements
+
+Each page should include:
+
+- A unique page title.
+- A relevant meta description.
+- Appropriate heading hierarchy.
+- Descriptive image alternative text.
+- Descriptive internal links.
+- Suitable canonical URLs where appropriate.
+- Social-sharing metadata.
+- Relevant project URLs.
+- A valid `robots.txt`.
+- A sitemap where practical.
+
+Project pages should provide appropriate Open Graph metadata for social sharing.
+
+Keywords should describe the actual work naturally rather than being repeated unnaturally.
+
+---
+
+# 14. Performance Requirements
+
+The website must remain lightweight despite displaying high-quality artwork.
+
+## 14.1 Performance Targets
+
+| Metric | Target |
+|---|---|
+| Lighthouse Performance | 90+ |
+| Largest Contentful Paint | ≤ 2.5 seconds |
+| Interaction to Next Paint | ≤ 200 milliseconds |
+| Cumulative Layout Shift | ≤ 0.1 |
+
+These are target values measured under appropriate conditions, not guaranteed outcomes.
+
+## 14.2 Optimization Requirements
+
+- Optimize all published images.
+- Limit font files and weights.
+- Avoid unnecessary JavaScript.
+- Use CSS for simple transitions.
+- Minimize third-party requests.
+- Avoid layout shifts.
+- Prevent nonessential animations from delaying content.
+- Test actual production pages.
+
+---
+
+# 15. Security and Privacy Requirements
+
+The website is a public static portfolio.
+
+It must not require user accounts or collect sensitive personal information.
+
+Requirements:
+
+- Never commit API keys or private credentials.
+- Do not publish confidential project files.
+- Avoid unnecessary tracking scripts.
+- Use HTTPS through GitHub Pages.
+- Verify external links.
+- Avoid untrusted third-party scripts.
+- Disclose any tracking or data collection added later.
+
+---
+
+# 16. GitHub Pages Deployment Requirements
+
+The website must be straightforward to deploy and maintain.
+
+Required tasks:
+
+1. Configure the intended GitHub repository.
+2. Enable GitHub Pages.
+3. Select the correct deployment source.
+4. Verify the published homepage.
+5. Confirm that CSS and JavaScript load correctly.
+6. Confirm that all images display correctly.
+7. Test internal navigation.
+8. Test direct access to project pages.
+9. Verify the custom 404 page.
+10. Test the production website on desktop and mobile.
+
+## Documentation
+
+The README must explain:
+
+- Project overview.
+- File structure.
+- Local preview instructions.
+- How to add projects.
+- How to replace artwork.
+- How to update contact details.
+- How to change colors and typography.
+- How to publish updates.
+- How to troubleshoot common deployment problems.
+
+---
+
+# 17. Functional Requirements Summary
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-001 | Display 16:01 Studio identity | P0 |
+| FR-002 | Display the professional title | P0 |
+| FR-003 | Provide functional navigation | P0 |
+| FR-004 | Display selected projects | P0 |
+| FR-005 | Provide individual project pages | P0 |
+| FR-006 | Display project titles and categories | P0 |
+| FR-007 | Filter projects by category | P0 |
+| FR-008 | Provide a working contact method | P0 |
+| FR-009 | Support responsive layouts | P0 |
+| FR-010 | Support keyboard navigation | P0 |
+| FR-011 | Respect reduced-motion preferences | P0 |
+| FR-012 | Provide About content | P1 |
+| FR-013 | Present available services | P1 |
+| FR-014 | Display related projects | P1 |
+| FR-015 | Provide a custom 404 page | P2 |
+| FR-016 | Support optional page transitions | P2 |
+| FR-017 | Support optional advanced motion effects | P2 |
+
+---
+
+# 18. Nonfunctional Requirements
+
+## Reliability
+The website must work without a continuously running server or backend.
+
+## Maintainability
+The designer must be able to update content using documented instructions.
+
+## Usability
+Visitors must be able to discover projects and contact information easily.
+
+## Accessibility
+Core functionality must remain available to keyboard users and visitors who prefer reduced motion.
+
+## Performance
+Images, fonts, and scripts must be optimized.
+
+## Scalability
+The architecture must support adding projects without requiring a complete redesign.
+
+## Compatibility
+The website must work across supported modern browsers and screen sizes.
+
+## Cost
+The initial release must be deployable for ₹0 using free hosting and development tools.
+
+---
+
+# 19. Out of Scope
+
+The following are not required for the initial release:
+
+- User authentication.
+- User accounts.
+- Admin dashboard.
+- Database.
+- Custom backend.
+- E-commerce checkout.
+- Payment processing.
+- Subscription systems.
+- Paid CMS.
+- Paid website builder.
+- Paid custom domain.
+- Complex real-time collaboration.
+- Mandatory 3D rendering engine.
+- Custom content-management interface.
+
+These features may be considered later if the product requirements change.
+
+---
+
+# 20. Minimum Viable Product (MVP)
+
+The initial release must include:
+
+1. Homepage with hero section.
+2. Selected project grid.
+3. Work page.
+4. Functional category filters.
+5. At least six quality projects, where sufficient artwork is available.
+6. At least three substantial case studies.
+7. About content.
+8. Working contact method.
+9. Responsive navigation.
+10. Responsive page layouts.
+11. Basic interaction feedback and selected animations.
+12. Accessible controls.
+13. Optimized images.
+14. SEO metadata.
+15. GitHub Pages deployment.
+16. README documentation.
+
+The website must prioritize real, high-quality work over unnecessary content volume.
+
+If fewer projects are available, publish the strongest work rather than inventing portfolio pieces or filling the website with weak placeholders.
+
+---
+
+# 21. Development Roadmap
+
+## Phase 1 — Planning and Setup
+
+**Estimated effort:** 2–4 hours
+
+- Confirm page structure.
+- Review available artwork.
+- Establish the visual direction.
+- Define design tokens.
+- Set up the repository.
+
+**Deliverable:** Project structure and initial specification.
+
+## Phase 2 — Design System
+
+**Estimated effort:** 3–5 hours
+
+- Define typography and colors.
+- Establish spacing and grid rules.
+- Create navigation and button styles.
+- Define project-card layouts.
+- Establish interaction states.
+
+**Deliverable:** Reusable design system.
+
+## Phase 3 — Homepage
+
+**Estimated effort:** 4–6 hours
+
+- Build the header.
+- Create the hero.
+- Add selected projects.
+- Add the creative introduction.
+- Add capabilities.
+- Add featured work.
+- Add contact CTA and footer.
+
+**Deliverable:** Complete homepage.
+
+## Phase 4 — Portfolio and Case Studies
+
+**Estimated effort:** 4–7 hours
+
+- Build the Work page.
+- Implement filtering.
+- Create the case-study structure.
+- Add project content.
+- Implement project navigation.
+
+**Deliverable:** Functional portfolio.
+
+## Phase 5 — Supporting Pages
+
+**Estimated effort:** 2–4 hours
+
+- Add About content.
+- Add Services content.
+- Complete Contact.
+- Implement 404 handling.
+- Verify links.
+
+**Deliverable:** Complete page structure.
+
+## Phase 6 — Motion and Refinement
+
+**Estimated effort:** 2–5 hours
+
+- Add selected transitions.
+- Refine hover interactions.
+- Add restrained scroll reveals.
+- Test reduced-motion behavior.
+- Refine responsive layouts.
+
+**Deliverable:** Polished responsive experience.
+
+## Phase 7 — Testing and Launch
+
+**Estimated effort:** 3–5 hours
+
+- Test navigation and filtering.
+- Check image loading.
+- Review mobile layouts.
+- Test accessibility.
+- Check console errors.
+- Review SEO metadata.
+- Verify GitHub Pages deployment.
+- Complete documentation.
+
+**Deliverable:** Published and tested website.
+
+**Total estimated development effort:** 20–36 active hours, excluding substantial new artwork creation and extensive content preparation.
+
+---
+
+# 22. Quality Assurance Checklist
+
+## Visual Quality
+
+- [ ] Consistent brand identity.
+- [ ] Clear typographic hierarchy.
+- [ ] Intentional spacing and alignment.
+- [ ] High-quality artwork presentation.
+- [ ] Consistent color palette.
+- [ ] No unnecessary visual clutter.
+- [ ] Distinctive editorial design.
+
+## Functionality
+
+- [ ] Navigation works.
+- [ ] Project cards open correctly.
+- [ ] Category filters work.
+- [ ] Contact links work.
+- [ ] Related project links work.
+- [ ] No nonfunctional buttons.
+- [ ] Browser navigation behaves correctly.
+
+## Responsive Design
+
+- [ ] Small mobile layout tested.
+- [ ] Mobile layout tested.
+- [ ] Tablet layout tested.
+- [ ] Desktop layout tested.
+- [ ] No unintended horizontal overflow.
+- [ ] Images scale correctly.
+- [ ] Touch interactions work.
+
+## Accessibility
+
+- [ ] Semantic HTML.
+- [ ] Keyboard navigation.
+- [ ] Visible focus states.
+- [ ] Appropriate text contrast.
+- [ ] Descriptive alternative text.
+- [ ] Reduced-motion support.
+- [ ] Properly labelled controls.
+
+## Performance
+
+- [ ] Images optimized.
+- [ ] Fonts limited to required files.
+- [ ] Unnecessary scripts removed.
+- [ ] Image dimensions specified.
+- [ ] Initial viewport loads efficiently.
+- [ ] Production performance tested.
+
+## Deployment
+
+- [ ] GitHub Pages configured.
+- [ ] Live homepage accessible.
+- [ ] CSS and JavaScript load.
+- [ ] Images load correctly.
+- [ ] Project URLs work directly.
+- [ ] Internal links work.
+- [ ] README completed.
+
+---
+
+# 23. Risks and Mitigation
+
+## Excessive Animation
+**Risk:** Motion distracts from the artwork.
+
+**Mitigation:** Complete the layout first and add only purposeful effects.
+
+## Inconsistent Artwork Quality
+**Risk:** Different image quality and presentation reduce visual cohesion.
+
+**Mitigation:** Prepare consistent thumbnails, image sizes, and presentation rules.
+
+## Overcomplicated Architecture
+**Risk:** Unnecessary files and dependencies make maintenance difficult.
+
+**Mitigation:** Use lightweight HTML, CSS, and JavaScript.
+
+## Broken Deployment Paths
+**Risk:** Assets work locally but fail on GitHub Pages.
+
+**Mitigation:** Verify paths and test the production deployment.
+
+## Weak Project Context
+**Risk:** Visitors cannot understand the purpose of the work.
+
+**Mitigation:** Provide concise project summaries, the designer's role, and relevant process details.
+
+## Nonfunctional Contact Form
+**Risk:** Visitors submit inquiries that never reach the designer.
+
+**Mitigation:** Use a verified email link unless a tested submission service is configured.
+
+## Missing Content
+**Risk:** The website appears unfinished.
+
+**Mitigation:** Prioritize the strongest available projects and publish only verified professional information.
+
+---
+
+# 24. Definition of Done
+
+The website is ready for launch when:
+
+1. It is published at the intended GitHub Pages URL.
+2. The visual identity is consistent across pages.
+3. The homepage introduces the designer and highlights selected work.
+4. Real, approved artwork is displayed.
+5. Project filtering works correctly.
+6. Individual case studies display properly.
+7. About and contact information are accessible.
+8. Navigation works across supported devices.
+9. No known broken images or dead links remain.
+10. Essential content remains usable without animation.
+11. Responsive and accessibility requirements have been reviewed.
+12. Performance and SEO have been tested.
+13. Documentation explains how to maintain the website.
+14. No paid service is required for the agreed initial functionality.
+
+---
+
+# 25. Final Product Requirements
+
+16:01 Studio must deliver a premium, editorial portfolio experience built around graphic design and illustration.
+
+The final product must combine:
+
+- Distinctive visual identity.
+- Bold and intentional typography.
+- Restrained color usage.
+- High-quality artwork presentation.
+- Flexible project layouts.
+- Detailed case studies.
+- Purposeful motion.
+- Responsive design.
+- Accessible interactions.
+- Fast loading.
+- Maintainable code.
+- Reliable GitHub Pages deployment.
+
+The project must prioritize creative quality, usability, and reliability over unnecessary technical complexity.
+
+**Final success criterion:** Visitors immediately recognize the 16:01 Studio identity, explore compelling design and illustration work, understand the designer's capabilities, and find a clear way to initiate professional contact.

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>16:01 Studio — Graphic Design &amp; Illustration</title>
+  <meta
+    name="description"
+    content="16:01 Studio is a graphic design and illustration portfolio."
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a class="brand" href="index.html" data-brand>16:01 Studio</a>
+        <nav class="nav">
+          <a class="nav__link" href="index.html" aria-current="page">Home</a>
+          <a class="nav__link" href="work.html">Work</a>
+          <a class="nav__link" href="about.html">About</a>
+          <a class="nav__link" href="services.html">Services</a>
+          <a class="nav__link" href="journal.html">Journal</a>
+          <a class="nav__link" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero__title" data-content="homeTitle">16:01 Studio</h1>
+        <p class="hero__lead" data-content="homeDescription">
+          Graphic design &amp; illustration — premium editorial work,
+          strong typography, and carefully composed images.
+        </p>
+        <a class="button button--accent" href="work.html">View work</a>
+      </div>
+    </section>
+
+    <section class="featured" aria-label="Featured work">
+      <div class="container">
+        <h2 class="section__title" data-content="homeFeaturedTitle">Featured</h2>
+        <div class="card-grid" id="featured-grid">
+          <!-- Project cards are injected here by js/main.js -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-preview" aria-label="Services preview">
+      <div class="container">
+        <h2 class="section__title" data-content="homeServicesTitle">Services</h2>
+        <p class="preview-intro" data-content="homeServicesIntro">Graphic design, illustration, and art direction for brands that value editorial rigour.</p>
+        <div class="services-grid" data-site-services="home">
+          <div class="service">
+            <h3 class="service__title">Brand identity</h3>
+            <p class="service__desc">Logos, visual systems, and brand guidelines built around strong typography.</p>
+          </div>
+          <div class="service">
+            <h3 class="service__title">Illustration</h3>
+            <p class="service__desc">Editorial and custom illustration for print and digital contexts.</p>
+          </div>
+          <div class="service">
+            <h3 class="service__title">Typography &amp; layout</h3>
+            <p class="service__desc">Editorial design, poster design, and typographic compositions.</p>
+          </div>
+        </div>
+        <a class="button button--outline" href="services.html" data-content="homeServicesLink">View all services</a>
+      </div>
+    </section>
+
+    <section class="section about-preview" aria-label="About preview">
+      <div class="container">
+        <h2 class="section__title" data-content="homeAboutTitle">About</h2>
+        <p class="preview-intro" data-content="homeAboutIntro">16:01 Studio is an independent graphic design and illustration practice.</p>
+        <p data-content="homeAboutBody">We produce premium editorial work, carefully composed images, and type-led identities for cultural and commercial clients.</p>
+        <a class="button button--outline" href="about.html" data-content="homeAboutLink">Learn more</a>
+      </div>
+    </section>
+
+    <section class="section contact-cta" aria-label="Contact">
+      <div class="container">
+        <h2 class="contact-cta__title" data-content="homeContactTitle">Let’s work together.</h2>
+        <p class="contact-cta__text" data-content="homeContactDescription">Available for selected commissions and collaborations.</p>
+        <a class="button button--accent" href="contact.html" data-content="homeContactLink">Get in touch</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
+      <div class="site-social-links" data-site-social-links></div>
+    </div>
+  </footer>
+
+  <script src="data/projects.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

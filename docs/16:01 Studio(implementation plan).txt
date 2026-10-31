@@ -1,0 +1,369 @@
+# 16:01 Studio
+## Website Implementation Plan
+**Project:** Graphic Design & Illustration Portfolio  
+**Website:** https://saelvostudio.github.io/  
+**Hosting:** GitHub Pages  
+**Budget:** ₹0 using free tools and services  
+**Implementation approach:** Design-first, phased development, testing, and deployment
+
+---
+
+## 1. Project Objective
+
+Build a premium, modern portfolio website for 16:01 Studio that presents graphic design and illustration work professionally, communicates the studio's visual identity, and helps potential clients discover projects and make contact.
+
+The website should feel like a creative studio rather than a generic portfolio template. It will combine strong editorial typography, generous whitespace, distinctive project layouts, high-quality artwork, subtle motion, and a responsive interface.
+
+### Core principles
+
+- **Design quality first:** Artwork and typography must be the main focus.
+- **Simple technology:** Use HTML, CSS, and JavaScript without unnecessary frameworks.
+- **Free deployment:** Host the website through GitHub Pages.
+- **Maintainable files:** Separate page content, styles, scripts, and project data.
+- **Progressive development:** Build and test one phase before moving to the next.
+- **Real work over placeholders:** Replace sample content with original portfolio assets before launch.
+
+## 2. Recommended Technology
+
+| Area | Technology |
+|---|---|
+| Page structure | HTML5 |
+| Visual styling | CSS3 |
+| Interactions | Vanilla JavaScript |
+| Icons | Custom SVG or suitable free icon resources |
+| Typography | Legally usable web fonts |
+| Source control | Git and GitHub |
+| Hosting | GitHub Pages |
+| Testing | Browser developer tools and responsive device testing |
+| Image preparation | Existing vector and raster design tools |
+
+**Important:** Begin with a static website. Avoid adding a backend, database, paid hosting, or complex framework unless the portfolio later needs capabilities that justify them.
+
+GitHub Pages is suitable for static HTML, CSS, and JavaScript websites. A static site does not provide a server-side database or process contact form submissions by itself.
+
+## 3. Implementation Roadmap
+
+<text color="secondary" size="sm">Estimated schedule: approximately 2–3 weeks of focused work. This is a planning estimate; the actual duration depends on content readiness, coding experience, and revision time.</text>
+
+### Phase 1 — Project Setup and Content Planning
+
+**Goal:** Prepare the project before writing the website code.
+
+Tasks:
+1. Create or verify the GitHub repository named `saelvostudio.github.io`.
+2. Confirm the website will be published through GitHub Pages.
+3. Create the local project folder and initial file structure.
+4. Select the final color palette, font pairings, spacing scale, and layout rules.
+5. Collect the logo, illustrations, vector artwork, mockups, and project descriptions.
+6. Decide which projects will appear on the homepage and Work page.
+
+**Deliverables:**
+- Working project repository
+- Finalized visual direction
+- Initial project inventory
+- File and folder structure
+
+**Completion criteria:** The repository is ready, the design direction is established, and the first group of portfolio assets is selected.
+
+### Phase 2 — Build the Design System
+
+**Goal:** Establish reusable visual rules before building individual pages.
+
+Tasks:
+1. Define colors, typography, spacing, page width, border styles, and breakpoints.
+2. Define reusable navigation, buttons, links, project cards, labels, and footer elements.
+3. Establish image presentation rules for portrait, landscape, square, and transparent artwork.
+4. Define hover, focus, loading, and active states.
+5. Document animation behavior, including reduced-motion support.
+
+**Deliverables:**
+- CSS design tokens
+- Reusable component styles
+- Typography and spacing system
+- Responsive layout rules
+
+**Completion criteria:** Common components look consistent and can be reused across all pages without duplicating styling.
+
+### Phase 3 — Develop the Core Website Structure
+
+**Goal:** Create all required pages and connect the navigation.
+
+Recommended structure:
+
+```text
+saelvostudio.github.io/
+├── index.html
+├── work.html
+├── about.html
+├── services.html
+├── contact.html
+├── 404.html
+├── projects/
+│   ├── project-one.html
+│   └── project-two.html
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+├── css/
+│   ├── reset.css
+│   ├── tokens.css
+│   ├── global.css
+│   ├── components.css
+│   ├── layout.css
+│   └── pages.css
+├── js/
+│   ├── main.js
+│   ├── navigation.js
+│   ├── filters.js
+│   └── animations.js
+└── README.md
+```
+
+Tasks:
+1. Create the main HTML pages.
+2. Add shared navigation and footer markup.
+3. Establish consistent page headings and content containers.
+4. Link internal pages using relative URLs compatible with GitHub Pages.
+5. Add a basic 404 page and document how to run and deploy the site.
+
+**Deliverables:** All required pages exist, navigation links work, and the structure is ready for visual implementation.
+
+**Completion criteria:** Every page loads without broken internal links or missing essential structure.
+
+### Phase 4 — Implement the Homepage
+
+**Goal:** Create the strongest first impression and immediately communicate the studio's identity.
+
+Recommended section order:
+
+1. **Header:** 16:01 Studio identity and clear navigation.
+2. **Hero:** Large headline, short introduction, and “View Work” action.
+3. **Featured work:** Highly visible selected projects with strong imagery.
+4. **Discipline overview:** Graphic design, illustration, and relevant specialties.
+5. **Studio introduction:** Short personal or studio statement.
+6. **Contact invitation:** A direct route for project enquiries.
+7. **Footer:** Essential links and copyright information.
+
+Tasks:
+- Implement the approved layout and typography.
+- Give featured artwork enough size and visual breathing room.
+- Add responsive behavior for narrow screens.
+- Add restrained transitions and hover treatments.
+- Ensure key information remains easy to find without animation.
+
+**Deliverable:** A complete, responsive homepage.
+
+**Completion criteria:** Visitors can identify the studio, understand its creative focus, explore selected work, and find contact information quickly.
+
+### Phase 5 — Implement the Work and Project Pages
+
+**Goal:** Present work as a carefully curated collection rather than an unstructured image gallery.
+
+**Work page tasks:**
+1. Create a consistent project grid or editorial project index.
+2. Add project titles, categories, and concise descriptions.
+3. Implement category filters only if they improve browsing.
+4. Make each project card link to a dedicated case study.
+5. Provide clear hover and keyboard-focus states.
+
+**Case-study tasks:**
+1. Present the project title, discipline, and short overview.
+2. Explain the brief, creative approach, and final outcome.
+3. Use a deliberate sequence of artwork images and mockups.
+4. Preserve appropriate image proportions and visual quality.
+5. Add previous/next project navigation where useful.
+6. Include a route back to all work.
+
+**Deliverable:** A browsable Work page with detailed project pages.
+
+**Completion criteria:** Visitors can navigate from the project index to a case study and back, and project artwork remains clear across screen sizes.
+
+### Phase 6 — Implement About, Services, and Contact
+
+**Goal:** Build trust and make the portfolio useful for potential clients.
+
+**About page**
+- Introduce the designer or studio.
+- Explain the creative approach and relevant experience.
+- Add a portrait or supporting visual if appropriate.
+- Keep the writing personal, professional, and concise.
+
+**Services page**
+- List only services the studio actually offers.
+- Explain the scope or typical deliverables of each service.
+- Use clear language rather than vague marketing claims.
+- Provide a route to enquire about a project.
+
+**Contact page**
+- Provide an email link and any professional social links.
+- Explain what information to include in a project enquiry.
+- Use a third-party form service only if a working form is genuinely needed and its free-plan limitations are acceptable.
+
+**Deliverable:** Complete supporting pages with consistent design and working contact routes.
+
+**Completion criteria:** Visitors understand the studio's offering and have a clear, tested way to make contact.
+
+### Phase 7 — Responsive Design, Motion, and Accessibility
+
+**Goal:** Refine the interface across desktop, tablet, and mobile.
+
+Tasks:
+1. Test layouts at narrow, medium, and wide viewport sizes.
+2. Check navigation, menus, buttons, card spacing, and image cropping.
+3. Implement subtle page transitions and reveal effects only where useful.
+4. Keep essential content visible if JavaScript or animation fails.
+5. Respect the operating system's reduced-motion preference.
+6. Ensure keyboard users can navigate the interface.
+7. Add meaningful alternative text to informative images.
+8. Check readable text contrast, visible focus indicators, and semantic HTML.
+9. Avoid horizontal overflow and oversized mobile images.
+
+**Deliverable:** A polished and accessible responsive experience.
+
+**Completion criteria:** The site remains usable with a mouse, keyboard, and touch input. Core content is accessible without relying on animation.
+
+### Phase 8 — Performance, SEO, and Quality Assurance
+
+**Goal:** Prepare the website for public release.
+
+Tasks:
+- Resize images to appropriate display dimensions.
+- Use modern image formats such as WebP where practical, keeping source artwork separately if needed.
+- Lazy-load suitable below-the-fold images.
+- Avoid excessive animation scripts and unnecessary dependencies.
+- Add unique page titles and meta descriptions.
+- Add a suitable favicon and social-sharing metadata.
+- Check page headings, image alternative text, and link labels.
+- Verify internal paths, external links, and browser console output.
+- Test on current desktop and mobile browsers.
+- Confirm that no test text, placeholder images, or unfinished sections remain.
+
+**Deliverable:** A tested release candidate.
+
+**Completion criteria:** No critical broken links, missing assets, blocking console errors, unusable mobile layouts, or unfinished launch content.
+
+### Phase 9 — GitHub Pages Deployment
+
+**Goal:** Publish the completed website.
+
+Tasks:
+1. Commit the verified files to the GitHub repository.
+2. Open the repository's GitHub Pages settings.
+3. Select the intended publishing source or branch.
+4. Confirm that deployment completes successfully.
+5. Open the live URL: `https://saelvostudio.github.io/`.
+6. Test the live site rather than relying only on the local version.
+7. Verify direct access to individual pages, case studies, and the 404 page.
+8. Fix any issues caused by incorrect paths, filename capitalization, or deployment configuration.
+
+**Deliverable:** Publicly accessible portfolio website.
+
+**Completion criteria:** The live website loads over HTTPS, and its navigation, images, case studies, and contact links work as expected.
+
+### Phase 10 — Post-launch Improvement
+
+**Goal:** Keep the portfolio current without rebuilding it.
+
+Tasks:
+- Add new projects as completed case studies.
+- Replace weaker projects with stronger work.
+- Update services and contact details when necessary.
+- Recheck links and image performance periodically.
+- Review visitor feedback and improve confusing sections.
+- Add advanced features only when there is a clear reason.
+
+**Deliverable:** A maintained, evolving portfolio.
+
+---
+
+## 4. Suggested Timeline
+
+| Period | Main focus | Expected result |
+|---|---|---|
+| Days 1–2 | Setup and content planning | Repository and artwork ready |
+| Days 3–4 | Design system | Consistent visual foundation |
+| Days 5–6 | Shared structure | Pages and navigation |
+| Days 7–9 | Homepage | Main visual experience |
+| Days 10–11 | Work and case studies | Project presentation |
+| Days 12–13 | About, Services, Contact | Supporting pages |
+| Days 14–15 | Responsive design and animation | Refined interaction |
+| Days 16–17 | QA, SEO, performance | Release candidate |
+| Days 18–19 | Deployment and final fixes | Published website |
+
+This schedule is a guide, not a strict deadline. If the project has many detailed case studies or custom animations, prioritize a reliable initial launch and add those refinements in a later iteration.
+
+## 5. Recommended AI-Assisted Development Workflow
+
+Use Claude AI to help create and review code files, and use Cline to apply changes in your local project when appropriate. Treat every phase as a separate, controlled implementation step.
+
+**For each phase:**
+
+1. Give the AI the approved Product Requirements Document, Technical Requirements Document, UI/UX Design Brief, and this Implementation Plan.
+2. Ask it to inspect the existing files before proposing changes.
+3. Specify exactly which files it may create or edit.
+4. Ask it to preserve the agreed visual direction, architecture, and existing functionality.
+5. Review the generated changes and run the site locally.
+6. Test the relevant acceptance criteria before moving to the next phase.
+7. Save a Git commit or backup after each working milestone.
+
+**Example instruction for every implementation prompt:**
+
+> Implement only the current phase of the 16:01 Studio portfolio project. Read the project requirements and inspect the existing files first. List the files you will create or modify, then implement the changes. Preserve the approved design direction and existing functionality. Use semantic HTML, maintainable CSS, and vanilla JavaScript unless the requirements explicitly justify another dependency. Do not overwrite unrelated working features. After implementation, explain how to test the changes and identify any known limitations. Do not claim that a feature works unless it has been verified.
+
+Do not ask the AI to build the entire website in one enormous prompt. Smaller steps make errors easier to detect and reduce the risk of losing working code.
+
+## 6. Milestone Checkpoints
+
+Use these checkpoints to decide whether to continue:
+
+- [ ] **Checkpoint 1:** The project opens locally and the folder structure is correct.
+- [ ] **Checkpoint 2:** Design tokens and shared components are consistent.
+- [ ] **Checkpoint 3:** Navigation and all main pages work.
+- [ ] **Checkpoint 4:** Homepage matches the intended visual direction.
+- [ ] **Checkpoint 5:** Project listings and case studies display correctly.
+- [ ] **Checkpoint 6:** Supporting pages and contact methods work.
+- [ ] **Checkpoint 7:** Mobile, keyboard, and reduced-motion checks pass.
+- [ ] **Checkpoint 8:** Image optimization, metadata, and link checks are complete.
+- [ ] **Checkpoint 9:** GitHub Pages deployment is successful.
+- [ ] **Checkpoint 10:** The live site is verified on desktop and mobile.
+
+## 7. Scope Control
+
+### Required for the first release
+- Homepage
+- Work index
+- At least two polished case studies, if enough suitable work is available
+- About page
+- Services page
+- Contact page
+- Shared responsive navigation and footer
+- Basic SEO and accessibility
+- GitHub Pages deployment
+
+### Can be added later
+- Advanced 3D effects or elaborate page transitions
+- Large-scale project filtering
+- Complex custom cursors
+- Content management system
+- Analytics
+- Additional case studies and experimental layouts
+
+Keep the initial version focused. A smaller, well-finished portfolio is more effective than a large website containing incomplete pages or distracting interactions.
+
+## 8. Final Definition of Done
+
+The implementation is complete when:
+
+1. 16:01 Studio has a distinctive and consistent visual identity.
+2. The site presents graphic design and illustration work professionally.
+3. All essential pages and navigation work.
+4. Layouts adapt to desktop, tablet, and mobile screens.
+5. Motion is subtle, purposeful, and accessible.
+6. Artwork and fonts are used with appropriate permission or licensing.
+7. Contact methods and external links work.
+8. The site meets basic performance, SEO, and accessibility requirements.
+9. The live GitHub Pages website has been tested.
+10. The source files are organized and understandable enough to maintain.
+
+**Final implementation priority:** Establish the visual system, build the homepage, create strong project case studies, finish the supporting pages, then refine motion and performance. The goal is a credible, visually distinctive portfolio that can launch for ₹0 and improve as 16:01 Studio grows.

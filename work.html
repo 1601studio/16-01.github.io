@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — 16:01 Studio</title>
+  <meta
+    name="description"
+    content="Selected graphic design and illustration work by 16:01 Studio."
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a class="brand" href="index.html" data-brand>16:01 Studio</a>
+        <nav class="nav">
+          <a class="nav__link" href="index.html">Home</a>
+          <a class="nav__link" href="work.html" aria-current="page">Work</a>
+          <a class="nav__link" href="about.html">About</a>
+          <a class="nav__link" href="services.html">Services</a>
+          <a class="nav__link" href="journal.html">Journal</a>
+          <a class="nav__link" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <header class="work-header">
+      <div class="container">
+        <h1 class="work-header__title" data-content="workTitle">Work</h1>
+        <p class="work-header__desc" data-content="workDescription">
+          Selected projects across branding, illustration, typography,
+          poster design, merchandise, and editorial design.
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div
+        class="filters"
+        data-project-filters
+        role="group"
+        aria-label="Project categories"
+      >
+        <!-- Categories are built from the published project data. -->
+      </div>
+
+      <div class="card-grid" id="work-grid" aria-live="polite">
+        <!-- Project cards are injected here by js/main.js -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
+      <div class="site-social-links" data-site-social-links></div>
+    </div>
+  </footer>
+
+  <script src="data/projects.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

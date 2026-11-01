@@ -1,8 +1,7 @@
 import { getSupabaseClient } from "./supabase-config.js";
 import { verifyAdmin } from "./auth.js";
+import { mountDashboard } from "./cms.js";
 
-const app = document.querySelector("#dashboard-app");
-const loading = document.querySelector("#dashboard-loading");
 const message = document.querySelector("#dashboard-message");
 const logoutButton = document.querySelector("#logout-button");
 
@@ -19,10 +18,7 @@ async function startDashboard() {
     return;
   }
 
-  document.querySelector("#admin-email").textContent = access.user.email || "Studio admin";
-  document.querySelector("#admin-role").textContent = access.role;
-  loading.hidden = true;
-  app.hidden = false;
+  await mountDashboard(access);
 
   client.auth.onAuthStateChange((event) => {
     if (event === "SIGNED_OUT") redirectToLogin("expired");

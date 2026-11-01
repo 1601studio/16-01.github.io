@@ -303,8 +303,73 @@ function renderCaseStudy() {
   }
 }
 
+const ADMIN_PALETTE_DEFAULTS = {
+  background: "#111310",
+  secondaryBackground: "#171914",
+  card: "#191B17",
+  accent: "#C64B35",
+  headingText: "#F5F2EB",
+  boxText: "#B0ADA5",
+  text: "#F5F2EB",
+  secondaryText: "#B0ADA5",
+  border: "#34352F",
+};
+
+const applyDashboardPreview = (palette) => {
+  if (!palette || typeof palette !== "object") return;
+  const keys = {
+    background: "--color-background",
+    secondaryBackground: "--color-background-secondary",
+    card: "--color-card",
+    accent: "--color-accent",
+    headingText: "--color-heading",
+    boxText: "--color-box-text",
+    text: "--color-text-primary",
+    secondaryText: "--color-text-secondary",
+    border: "--color-border",
+  };
+  if (Object.keys(keys).some((key) => !/^#[\da-f]{6}$/i.test(palette[key] || ""))) return;
+  const rootStyle = document.documentElement.style;
+  Object.entries(keys).forEach(([key, variable]) => rootStyle.setProperty(variable, palette[key]));
+  rootStyle.setProperty("--color-surface", palette.card);
+  rootStyle.setProperty("--color-accent-hover", palette.accent);
+  rootStyle.setProperty("--color-focus", palette.accent);
+};
+
+const applyDashboardTypography = (fonts) => {
+  if (!fonts || !Array.isArray(fonts.entries)) return;
+  const rootStyle = document.documentElement.style;
+  const heading = fonts.entries.find((font) => font.id === fonts.heading);
+  const body = fonts.entries.find((font) => font.id === fonts.body);
+  const validStack = (font) => typeof font?.stack === "string" && /^[A-Za-z0-9 ,.'&"()_-]+$/.test(font.stack);
+  if (validStack(heading)) rootStyle.setProperty("--font-serif", heading.stack);
+  if (validStack(body)) rootStyle.setProperty("--font-sans", body.stack);
+};
+
+const readDashboardPreview = () => {
+  try {
+    const stored = JSON.parse(localStorage.getItem("1601-admin-dashboard-v1") || "null");
+    if (!stored || stored.version !== 1) return;
+    const palette = { ...ADMIN_PALETTE_DEFAULTS, ...(stored.palette || {}) };
+    applyDashboardPreview(palette);
+    applyDashboardTypography(stored.fonts);
+  } catch (error) {
+    console.warn("Could not read the local dashboard website preview.", error);
+  }
+};
+
+window.addEventListener("message", (event) => {
+  if (event.origin !== window.location.origin || event.data?.type !== "1601-admin-color-preview") return;
+  applyDashboardPreview(event.data.palette);
+});
+
+window.addEventListener("storage", (event) => {
+  if (event.key === "1601-admin-dashboard-v1") readDashboardPreview();
+});
+
 /* ── Initialisation ────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
+  readDashboardPreview();
 
   /* Current year in every footer. */
   const yearEl = document.getElementById("year");

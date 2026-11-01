@@ -66,8 +66,28 @@ sites.
 
 ## Publish on GitHub Pages
 
-Use the repository's existing GitHub Pages settings and deployment process.
-No build step or deployment configuration change is required.
+The workflow in `.github/workflows/deploy.yml` publishes the repository root
+on pushes to `main` and on manual runs. In repository Settings > Pages, set
+Build and deployment > Source to **GitHub Actions**. Add the public repository
+variables `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` in Settings > Secrets
+and variables > Actions > Variables. If either is missing or invalid, the
+deployment succeeds with Supabase inactive. No build step or framework is
+required.
+
+## Optional Supabase client
+
+During deployment, `scripts/generate-supabase-config.js` writes
+`js/supabase-runtime-config.js` from those repository variables. The file is
+ignored by Git, is loaded before the Supabase client, and contains only a valid
+HTTPS URL and `sb_publishable_` key. Never use a Supabase secret key,
+service-role key, or database password in public website code. The optional
+client does not connect the contact form.
+
+The client alone requires no database tables, Storage buckets, or Row Level
+Security policies, and none are created here. Before adding a feature that
+reads or writes Supabase data or Storage, define its schema and access needs,
+then implement and verify least-privilege Row Level Security policies before
+enabling browser access.
 
 ## Accessibility
 

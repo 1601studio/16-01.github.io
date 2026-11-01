@@ -211,6 +211,7 @@ const inspectHtml = (htmlPath) => {
     let targetPath = path.resolve(path.dirname(htmlPath), cleanPath || path.basename(htmlPath));
     if (fs.existsSync(targetPath) && fs.statSync(targetPath).isDirectory()) targetPath = path.join(targetPath, "index.html");
     if (!fs.existsSync(targetPath) || !fs.statSync(targetPath).isFile()) {
+      if (relativeHtml === "contact.html" && value === "js/supabase-runtime-config.js") continue;
       addError(`${relativeHtml}: broken local ${reference.attribute} reference "${value}".`);
       continue;
     }

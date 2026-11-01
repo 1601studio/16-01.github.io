@@ -1,0 +1,39 @@
+# Private local project catalog and artwork are never part of the public site.
+/data/projects.js
+/assets/images/projects/
+/assets/projects/
+/assets/images/client-work/
+/assets/images/originals/
+/assets/images/private/
+/assets/client-work/
+/assets/deliverables/
+/assets/originals/
+/assets/private/
+/assets/source-files/
+/assets/design-sources/
+/client-work/
+/deliverables/
+/originals/
+/private/
+/source-files/
+/design-sources/
+
+# Internal planning documents are kept locally, not published with the site.
+/docs/16:01 Studio*.txt
+
+# Editable artwork and design-source formats.
+*.psd
+*.ai
+*.indd
+*.sketch
+*.fig
+*.xd
+*.blend
+*.kra
+*.procreate
+*.afdesign
+*.afphoto
+*.afpub
+*.clip
+*.xcf
+*.eps

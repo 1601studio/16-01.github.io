@@ -342,6 +342,24 @@ a:hover {
   text-align: center;
 }
 
+.footer__nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.footer__nav a {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.footer__nav a:hover {
+  color: var(--color-text-primary);
+}
+
 /* ─── 8. Project card component ───
    Primary image visible by default; optional secondary preview image
    cross-fades in on hover / focus (~350ms). Whole card links to its
@@ -765,6 +783,11 @@ a:hover {
   color: var(--color-text-secondary);
 }
 
+.case-study__date {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
 .case-study__hero {
   width: 100%;
   border: 1px solid var(--color-border);
@@ -791,6 +814,13 @@ a:hover {
   margin: 0 0 var(--space-3);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: var(--space-3);
+}
+
+.case-study__description {
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+  margin: 0 0 var(--space-3);
+  white-space: pre-line;
 }
 
 .case-study__role {

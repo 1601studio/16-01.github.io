@@ -8,6 +8,7 @@
     name="description"
     content="Project case study by 16:01 Studio."
   />
+  <link rel="icon" href="../assets/images/icons/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -16,13 +17,12 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a class="brand" href="../index.html" data-brand>16:01 Studio</a>
+        <a class="brand" href="../index.html">16:01 Studio</a>
         <nav class="nav">
           <a class="nav__link" href="../index.html">Home</a>
           <a class="nav__link" href="../work.html">Work</a>
-          <a class="nav__link" href="../about.html">About</a>
+          <a class="nav__link" href="../about.html">Studio</a>
           <a class="nav__link" href="../services.html">Services</a>
-          <a class="nav__link" href="../journal.html">Journal</a>
           <a class="nav__link" href="../contact.html">Contact</a>
         </nav>
       </div>
@@ -36,6 +36,8 @@
         <div class="case-study__meta">
           <span class="case-study__category" id="cs-category"></span>
           <span class="case-study__year" id="cs-year"></span>
+          <time class="case-study__date" id="cs-completed" hidden></time>
+          <time class="case-study__date" id="cs-published" hidden></time>
         </div>
       </div>
     </header>
@@ -44,6 +46,7 @@
       <div class="case-study-content">
         <aside>
           <div class="case-study__summary" id="cs-summary"></div>
+          <p class="case-study__description" id="cs-description" hidden></p>
           <span class="case-study__role" id="cs-role"></span>
         </aside>
 
@@ -71,12 +74,15 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
-      <div class="site-social-links" data-site-social-links></div>
+      <p>&copy; <span id="year"></span> <span>16:01 Studio</span>. All rights reserved. <span></span></p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="../index.html">Home</a><a href="../work.html">Work</a>
+        <a href="../about.html">Studio</a><a href="../services.html">Services</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
     </div>
   </footer>
 
-  <script src="../data/projects.js" defer></script>
   <script src="../js/main.js" defer></script>
 </body>
 </html>

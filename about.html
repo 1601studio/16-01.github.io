@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — 16:01 Studio</title>
+  <title>Studio — 16:01 Studio</title>
   <meta
     name="description"
-    content="About 16:01 Studio, graphic design and illustration."
+    content="About the 16:01 Studio graphic design and illustration practice."
   />
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -15,13 +16,12 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a class="brand" href="index.html" data-brand>16:01 Studio</a>
+        <a class="brand" href="index.html">16:01 Studio</a>
         <nav class="nav">
           <a class="nav__link" href="index.html">Home</a>
           <a class="nav__link" href="work.html">Work</a>
-          <a class="nav__link" href="about.html" aria-current="page">About</a>
+          <a class="nav__link" href="about.html" aria-current="page">Studio</a>
           <a class="nav__link" href="services.html">Services</a>
-          <a class="nav__link" href="journal.html">Journal</a>
           <a class="nav__link" href="contact.html">Contact</a>
         </nav>
       </div>
@@ -31,8 +31,8 @@
   <main id="content">
     <header class="about-header">
       <div class="container">
-        <h1 class="work-header__title" data-content="aboutTitle">About</h1>
-        <p class="work-header__desc" data-content="aboutDescription">
+        <h1 class="work-header__title">Studio</h1>
+        <p class="work-header__desc">
           An independent graphic design and illustration practice.
         </p>
       </div>
@@ -41,13 +41,13 @@
     <div class="container">
       <div class="about-grid">
         <div>
-          <h2 class="section__title" data-content="aboutSectionTitle">About the studio</h2>
-          <p class="about__text" data-content="aboutBodyOne">
+          <h2 class="section__title">About the studio</h2>
+          <p class="about__text">
             16:01 Studio is an independent graphic design and illustration
             practice focused on premium editorial work, strong typography, and
             carefully composed images.
           </p>
-          <p class="about__text" data-content="aboutBodyTwo">
+          <p class="about__text">
             We collaborate with cultural and commercial clients on brand
             identity, illustration, typography, and print design. Every project
             is approached as a distinct editorial composition.
@@ -59,8 +59,12 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
-      <div class="site-social-links" data-site-social-links></div>
+      <p>&copy; <span id="year"></span> <span>16:01 Studio</span>. All rights reserved. <span></span></p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html">Home</a><a href="work.html">Work</a>
+        <a href="about.html">Studio</a><a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
   </footer>
 

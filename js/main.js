@@ -18,233 +18,29 @@ const resolveAsset = (src) => {
   if (!src) return src;
   if (/^(https?:|data:|\/\/)/i.test(src)) return src;
   const projectPath = src.replace(/^\/+/, "");
-  const path = location.pathname;
-  const parts = path.split("/").filter(Boolean);
-  const last = parts[parts.length - 1];
-  const dirDepth = last.includes(".") ? parts.length - 1 : parts.length;
-  const subDepth = Math.max(0, dirDepth - 1);
-  return "../".repeat(subDepth) + projectPath;
+  return location.pathname.endsWith("/projects/case-study.html")
+    ? `../${projectPath}`
+    : projectPath;
 };
 
-/* Admin edits are a browser-local preview only; GitHub Pages files stay unchanged. */
-const readSiteAdminValue = (key) => {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw === null ? null : JSON.parse(raw);
-  } catch (error) {
-    console.warn(`Could not read browser-local admin preview data for "${key}".`, error);
-    return null;
-  }
+const getSiteProjects = () =>
+  typeof projects !== "undefined" && Array.isArray(projects) ? projects : [];
+
+const formatProjectDate = (dateValue) => {
+  if (typeof dateValue !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(dateValue)) return "";
+  const date = new Date(`${dateValue}T00:00:00Z`);
+  if (Number.isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== dateValue) return "";
+  return new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC"
+  }).format(date);
 };
 
-const getSiteProjects = () => {
-  const savedProjects = readSiteAdminValue("1601-admin-projects-v1");
-  return Array.isArray(savedProjects) ? savedProjects : projects;
-};
-
-const applySiteAdminSettings = () => {
-  const settings = readSiteAdminValue("1601-admin-settings-v1");
-  if (!settings || typeof settings !== "object") return;
-
-  const colorStyles = {
-    studio: {
-      background: "#111310",
-      secondaryBackground: "#171914",
-      card: "#191b17",
-      headingText: "#F5F2EB",
-      boxText: "#B0ADA5",
-      text: "#F5F2EB",
-      secondaryText: "#B0ADA5",
-      accent: "#C64B35",
-      border: "#34352F",
-    },
-    navy: {
-      background: "#080B19",
-      secondaryBackground: "#0C1129",
-      card: "#141C33",
-      headingText: "#F4F6FC",
-      boxText: "#929DB5",
-      text: "#F4F6FC",
-      secondaryText: "#929DB5",
-      accent: "#2563EB",
-      border: "#252E48",
-    },
-  };
-  const baseColorStyle = settings.colorPalette ? colorStyles.studio : colorStyles[settings.colorStyle];
-  const savedPalette = settings.colorPalette || settings.colorPalettes?.[settings.colorStyle] || {};
-  const selectedColorStyle = baseColorStyle && Object.fromEntries(
-    Object.entries(baseColorStyle).map(([key, value]) => {
-      const savedColor = key === "boxText" ? savedPalette.boxText || savedPalette.secondaryText : savedPalette[key];
-      return [key, typeof savedColor === "string" && /^#[\da-f]{6}$/i.test(savedColor) ? savedColor : value];
-    }),
-  );
-  if (selectedColorStyle) {
-    const rootStyle = document.documentElement.style;
-    rootStyle.setProperty("--color-background", selectedColorStyle.background);
-    rootStyle.setProperty("--color-background-secondary", selectedColorStyle.secondaryBackground);
-    rootStyle.setProperty("--color-card", selectedColorStyle.card);
-    rootStyle.setProperty("--color-surface", selectedColorStyle.card);
-    rootStyle.setProperty("--color-heading", selectedColorStyle.headingText);
-    rootStyle.setProperty("--color-box-text", selectedColorStyle.boxText);
-    rootStyle.setProperty("--color-text-primary", selectedColorStyle.text);
-    rootStyle.setProperty("--color-text-secondary", selectedColorStyle.secondaryText);
-    rootStyle.setProperty("--color-accent", selectedColorStyle.accent);
-    rootStyle.setProperty("--color-accent-hover", selectedColorStyle.accent);
-    rootStyle.setProperty("--color-border", selectedColorStyle.border);
-    rootStyle.setProperty("--color-focus", selectedColorStyle.accent);
-  }
-
-  const fontStyles = {
-    editorial: {
-      display: 'Georgia, "Times New Roman", Times, serif',
-      sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    },
-    classic: {
-      display: 'Georgia, "Times New Roman", Times, serif',
-      sans: 'Arial, Helvetica, sans-serif',
-    },
-    modern: {
-      display: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    },
-    literary: {
-      display: '"Times New Roman", Times, serif',
-      sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    },
-  };
-  const selectedFonts = fontStyles[settings.fontStyle];
-  if (selectedFonts) {
-    document.documentElement.style.setProperty("--font-serif", selectedFonts.display);
-    document.documentElement.style.setProperty("--font-sans", selectedFonts.sans);
-  }
-  const fontLibrary = {
-    georgia: 'Georgia, "Times New Roman", Times, serif',
-    times: '"Times New Roman", Times, serif',
-    palatino: '"Palatino Linotype", "Book Antiqua", Palatino, serif',
-    system: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    arial: 'Arial, Helvetica, sans-serif',
-    trebuchet: '"Trebuchet MS", sans-serif',
-    verdana: 'Verdana, Geneva, sans-serif',
-    courier: '"Courier New", Courier, monospace',
-  };
-  const savedFontData = readSiteAdminValue("1601-admin-font-library-v1") || {};
-  const savedFonts = [
-    ...(Array.isArray(savedFontData.overrides) ? savedFontData.overrides : []),
-    ...(Array.isArray(savedFontData.custom) ? savedFontData.custom : []),
-  ];
-  const availableFonts = new Map([
-    ...Object.entries(fontLibrary).map(([id, stack]) => [id, stack]),
-    ...savedFonts
-      .filter((font) => font && typeof font.id === "string" && typeof font.stack === "string" && font.stack.length <= 180 && /^[a-zA-Z0-9\s,"'()._-]+$/.test(font.stack) && /[a-zA-Z]/.test(font.stack))
-      .map((font) => [font.id, font.stack]),
-  ]);
-  const selectedHeading = availableFonts.get(settings.fontLibrary?.heading);
-  const selectedBody = availableFonts.get(settings.fontLibrary?.body);
-  if (selectedHeading) document.documentElement.style.setProperty("--font-serif", selectedHeading);
-  if (selectedBody) document.documentElement.style.setProperty("--font-sans", selectedBody);
-  const fontSizeTokens = {
-    body: {
-      xs: [0.5, 0.5, 2],
-      sm: [0.875, 1, 1],
-      base: [1, 1.5, 1.25],
-      lg: [1.25, 2, 1.5],
-    },
-    heading: {
-      xl: [1.5, 2.5, 1.75],
-      "2xl": [1.75, 3, 2],
-      "3xl": [2.5, 4, 4.5],
-      "4xl": [6, 5, 7],
-    },
-  };
-  Object.entries(fontSizeTokens).forEach(([role, tokens]) => {
-    const scale = settings.fontLibrary?.[`${role}Scale`];
-    const factor = Number.isInteger(scale) && scale >= 75 && scale <= 150 ? scale / 100 : 1;
-    const formatSize = (value) => Number((value * factor).toFixed(3));
-    Object.entries(tokens).forEach(([token, [minimum, fluid, maximum]]) => {
-      document.documentElement.style.setProperty(`--fs-${token}-min`, `${formatSize(minimum)}rem`);
-      document.documentElement.style.setProperty(`--fs-${token}-fluid`, `${formatSize(fluid)}vw`);
-      document.documentElement.style.setProperty(`--fs-${token}-max`, `${formatSize(maximum)}rem`);
-    });
-  });
-
-  document.querySelectorAll("[data-brand]").forEach((brand) => {
-    if (settings.logo && /^(https:\/\/|\/|assets\/|data:image\/)/i.test(settings.logo)) {
-      const image = document.createElement("img");
-      image.className = "brand__logo-local";
-      image.src = resolveAsset(settings.logo);
-      image.alt = settings.websiteName || "16:01 Studio";
-      brand.replaceChildren(image);
-    } else {
-      brand.textContent = settings.websiteName || "16:01 Studio";
-    }
-  });
-
-  const pageContent = settings.pageContent || {};
-  document.querySelectorAll("[data-content]").forEach((element) => {
-    const value = pageContent[element.dataset.content];
-    if (typeof value === "string") element.textContent = value;
-  });
-
-  const email = document.querySelector("[data-contact-email]");
-  const emailRow = document.querySelector("[data-contact-email-row]");
-  if (settings.contactEmail && email) {
-    email.textContent = settings.contactEmail;
-    email.href = `mailto:${settings.contactEmail}`;
-    if (emailRow) emailRow.hidden = false;
-  }
-
-  const description = settings.seoDescription;
-  const metaDescription = document.querySelector('meta[name="description"]');
-  if (description && metaDescription) metaDescription.content = description;
-  if (settings.seoTitle && document.getElementById("featured-grid")) document.title = settings.seoTitle;
-
-  document.querySelectorAll("[data-site-social-links]").forEach((container) => {
-    container.replaceChildren();
-    [
-      ["Instagram", settings.instagram],
-      ["Social", settings.social],
-    ].filter(([, url]) => typeof url === "string" && /^https:\/\//i.test(url))
-      .forEach(([label, url]) => {
-        const link = document.createElement("a");
-        link.href = url;
-        link.textContent = label;
-        link.rel = "noopener noreferrer";
-        container.append(link);
-      });
-  });
-};
-
-const renderSiteServices = () => {
-  const storedServices = readSiteAdminValue("1601-admin-services-v1");
-  if (!Array.isArray(storedServices)) return;
-  document.querySelectorAll("[data-site-services]").forEach((container) => {
-    container.replaceChildren();
-    storedServices.forEach((service) => {
-      const item = document.createElement(container.dataset.siteServices === "home" ? "div" : "article");
-      item.className = container.dataset.siteServices === "home" ? "service" : "service-item";
-      if (container.dataset.siteServices === "home") {
-        const title = document.createElement("h3");
-        title.className = "service__title";
-        title.textContent = service.name;
-        const description = document.createElement("p");
-        description.className = "service__desc";
-        description.textContent = service.description;
-        item.append(title, description);
-      } else {
-        const meta = document.createElement("span");
-        meta.className = "service-item__meta";
-        meta.textContent = service.name;
-        const title = document.createElement("h2");
-        title.className = "service-item__title";
-        title.textContent = service.name;
-        const description = document.createElement("p");
-        description.className = "service-item__desc";
-        description.textContent = service.description;
-        item.append(meta, title, description);
-      }
-      container.append(item);
-    });
-  });
+const getProjectYear = (project) => {
+  if (formatProjectDate(project.completedAt)) return project.completedAt.slice(0, 4);
+  return project.year || "";
 };
 
 const populateProjectFilters = (projectList) => {
@@ -253,10 +49,7 @@ const populateProjectFilters = (projectList) => {
   const assignedCategories = new Set(
     projectList.flatMap((project) => [project.category, ...(project.categories || [])]).filter(Boolean)
   );
-  const storedCategories = readSiteAdminValue("1601-admin-categories-v1");
-  const categoryNames = Array.isArray(storedCategories)
-    ? storedCategories.map((category) => category.name).filter((name) => assignedCategories.has(name))
-    : [...assignedCategories];
+  const categoryNames = [...assignedCategories];
   const allButton = document.createElement("button");
   allButton.type = "button";
   allButton.className = "filter__btn filter__btn--active";
@@ -347,10 +140,11 @@ function createCard(project) {
   body.appendChild(category);
   body.appendChild(title);
 
-  if (project.year) {
+  const cardYear = getProjectYear(project);
+  if (cardYear) {
     const year = document.createElement("span");
     year.className = "card__year";
-    year.textContent = project.year;
+    year.textContent = cardYear;
     body.appendChild(year);
   }
 
@@ -388,6 +182,9 @@ function renderCaseStudy() {
   const categoryEl = document.getElementById("cs-category");
   const yearEl = document.getElementById("cs-year");
   const summaryEl = document.getElementById("cs-summary");
+  const descriptionEl = document.getElementById("cs-description");
+  const completedEl = document.getElementById("cs-completed");
+  const publishedEl = document.getElementById("cs-published");
   const roleEl = document.getElementById("cs-role");
   const heroEl = document.getElementById("cs-hero");
   const galleryEl = document.getElementById("cs-gallery");
@@ -406,9 +203,12 @@ function renderCaseStudy() {
     setPageTitle("Project not found");
     if (categoryEl) categoryEl.textContent = "—";
     if (yearEl) yearEl.textContent = "—";
+    if (completedEl) completedEl.hidden = true;
+    if (publishedEl) publishedEl.hidden = true;
     if (summaryEl)
       summaryEl.textContent =
         "This project could not be found. It may be unpublished or its slug may have changed.";
+    if (descriptionEl) descriptionEl.hidden = true;
     if (roleEl) roleEl.style.display = "none";
     if (heroEl) heroEl.style.display = "none";
     if (galleryEl) galleryEl.style.display = "none";
@@ -417,9 +217,26 @@ function renderCaseStudy() {
 
   setPageTitle(project.title);
   if (categoryEl) categoryEl.textContent = project.category || "—";
-  if (yearEl) yearEl.textContent = project.year ? project.year : "—";
+  if (yearEl) {
+    yearEl.textContent = getProjectYear(project) || "—";
+  }
   if (summaryEl)
     summaryEl.textContent = project.summary || "";
+  if (descriptionEl) {
+    descriptionEl.textContent = project.description || "";
+    descriptionEl.hidden = !project.description;
+  }
+  const setDate = (element, label, dateValue) => {
+    if (!element) return;
+    const formattedDate = formatProjectDate(dateValue);
+    element.hidden = !formattedDate;
+    if (formattedDate) {
+      element.dateTime = dateValue;
+      element.textContent = `${label}: ${formattedDate}`;
+    }
+  };
+  setDate(completedEl, "Completed", project.completedAt);
+  setDate(publishedEl, "Published", project.publishedAt);
   if (roleEl) {
     roleEl.textContent = project.role || "";
     roleEl.hidden = !project.role;
@@ -486,32 +303,8 @@ function renderCaseStudy() {
   }
 }
 
-window.addEventListener("message", (event) => {
-  if (event.origin !== window.location.origin || event.data?.type !== "1601-admin-color-preview") return;
-  const palette = event.data.palette;
-  const keys = {
-    background: "--color-background",
-    secondaryBackground: "--color-background-secondary",
-    card: "--color-card",
-    headingText: "--color-heading",
-    boxText: "--color-box-text",
-    text: "--color-text-primary",
-    secondaryText: "--color-text-secondary",
-    accent: "--color-accent",
-    border: "--color-border",
-  };
-  if (!palette || typeof palette !== "object" || Object.keys(keys).some((key) => !/^#[\da-f]{6}$/i.test(palette[key] || ""))) return;
-  const rootStyle = document.documentElement.style;
-  Object.entries(keys).forEach(([key, variable]) => rootStyle.setProperty(variable, palette[key]));
-  rootStyle.setProperty("--color-surface", palette.card);
-  rootStyle.setProperty("--color-accent-hover", palette.accent);
-  rootStyle.setProperty("--color-focus", palette.accent);
-});
-
 /* ── Initialisation ────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
-  applySiteAdminSettings();
-  renderSiteServices();
 
   /* Current year in every footer. */
   const yearEl = document.getElementById("year");
@@ -576,11 +369,5 @@ document.addEventListener("DOMContentLoaded", () => {
         "Your message has not been sent because this form is not connected.";
       contactMessage.style.color = "var(--color-text-secondary)";
     });
-  }
-});
-
-window.addEventListener("storage", (event) => {
-  if (event.key && event.key.startsWith("1601-admin-") && event.key !== "1601-admin-session-v1") {
-    location.reload();
   }
 });

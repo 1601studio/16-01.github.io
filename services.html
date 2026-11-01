@@ -8,6 +8,7 @@
     name="description"
     content="Services offered by 16:01 Studio: graphic design, illustration, and art direction."
   />
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -15,15 +16,14 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a class="brand" href="index.html" data-brand>16:01 Studio</a>
+        <a class="brand" href="index.html">16:01 Studio</a>
         <nav class="nav">
           <a class="nav__link" href="index.html">Home</a>
           <a class="nav__link" href="work.html">Work</a>
-          <a class="nav__link" href="about.html">About</a>
+          <a class="nav__link" href="about.html">Studio</a>
           <a class="nav__link" href="services.html" aria-current="page">
             Services
           </a>
-          <a class="nav__link" href="journal.html">Journal</a>
           <a class="nav__link" href="contact.html">Contact</a>
         </nav>
       </div>
@@ -33,15 +33,15 @@
   <main id="content">
     <header class="services-header">
       <div class="container">
-        <h1 class="work-header__title" data-content="servicesTitle">Services</h1>
-        <p class="work-header__desc" data-content="servicesDescription">
+        <h1 class="work-header__title">Services</h1>
+        <p class="work-header__desc">
           Graphic design, illustration, and art direction.
         </p>
       </div>
     </header>
 
     <div class="container">
-      <div class="services-list" data-site-services="full">
+      <div class="services-list">
         <div class="service-item">
           <span class="service-item__meta">Brand identity</span>
           <h2 class="service-item__title">Brand identity</h2>
@@ -77,8 +77,12 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
-      <div class="site-social-links" data-site-social-links></div>
+      <p>&copy; <span id="year"></span> <span>16:01 Studio</span>. All rights reserved. <span></span></p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html">Home</a><a href="work.html">Work</a>
+        <a href="about.html">Studio</a><a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
   </footer>
 

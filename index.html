@@ -8,6 +8,7 @@
     name="description"
     content="16:01 Studio is a graphic design and illustration portfolio."
   />
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -16,13 +17,12 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a class="brand" href="index.html" data-brand>16:01 Studio</a>
+        <a class="brand" href="index.html">16:01 Studio</a>
         <nav class="nav">
           <a class="nav__link" href="index.html" aria-current="page">Home</a>
           <a class="nav__link" href="work.html">Work</a>
-          <a class="nav__link" href="about.html">About</a>
+          <a class="nav__link" href="about.html">Studio</a>
           <a class="nav__link" href="services.html">Services</a>
-          <a class="nav__link" href="journal.html">Journal</a>
           <a class="nav__link" href="contact.html">Contact</a>
         </nav>
       </div>
@@ -32,8 +32,8 @@
   <main id="content">
     <section class="hero">
       <div class="container">
-        <h1 class="hero__title" data-content="homeTitle">16:01 Studio</h1>
-        <p class="hero__lead" data-content="homeDescription">
+        <h1 class="hero__title">16:01 Studio</h1>
+        <p class="hero__lead">
           Graphic design &amp; illustration — premium editorial work,
           strong typography, and carefully composed images.
         </p>
@@ -43,7 +43,7 @@
 
     <section class="featured" aria-label="Featured work">
       <div class="container">
-        <h2 class="section__title" data-content="homeFeaturedTitle">Featured</h2>
+        <h2 class="section__title">Featured</h2>
         <div class="card-grid" id="featured-grid">
           <!-- Project cards are injected here by js/main.js -->
         </div>
@@ -52,9 +52,9 @@
 
     <section class="section services-preview" aria-label="Services preview">
       <div class="container">
-        <h2 class="section__title" data-content="homeServicesTitle">Services</h2>
-        <p class="preview-intro" data-content="homeServicesIntro">Graphic design, illustration, and art direction for brands that value editorial rigour.</p>
-        <div class="services-grid" data-site-services="home">
+        <h2 class="section__title">Services</h2>
+        <p class="preview-intro">Graphic design, illustration, and art direction for brands that value editorial rigour.</p>
+        <div class="services-grid">
           <div class="service">
             <h3 class="service__title">Brand identity</h3>
             <p class="service__desc">Logos, visual systems, and brand guidelines built around strong typography.</p>
@@ -68,36 +68,39 @@
             <p class="service__desc">Editorial design, poster design, and typographic compositions.</p>
           </div>
         </div>
-        <a class="button button--outline" href="services.html" data-content="homeServicesLink">View all services</a>
+        <a class="button button--outline" href="services.html">View all services</a>
       </div>
     </section>
 
     <section class="section about-preview" aria-label="About preview">
       <div class="container">
-        <h2 class="section__title" data-content="homeAboutTitle">About</h2>
-        <p class="preview-intro" data-content="homeAboutIntro">16:01 Studio is an independent graphic design and illustration practice.</p>
-        <p data-content="homeAboutBody">We produce premium editorial work, carefully composed images, and type-led identities for cultural and commercial clients.</p>
-        <a class="button button--outline" href="about.html" data-content="homeAboutLink">Learn more</a>
+        <h2 class="section__title">Studio</h2>
+        <p class="preview-intro">16:01 Studio is an independent graphic design and illustration practice.</p>
+        <p>We produce premium editorial work, carefully composed images, and type-led identities for cultural and commercial clients.</p>
+        <a class="button button--outline" href="about.html">Learn more</a>
       </div>
     </section>
 
     <section class="section contact-cta" aria-label="Contact">
       <div class="container">
-        <h2 class="contact-cta__title" data-content="homeContactTitle">Let’s work together.</h2>
-        <p class="contact-cta__text" data-content="homeContactDescription">Available for selected commissions and collaborations.</p>
-        <a class="button button--accent" href="contact.html" data-content="homeContactLink">Get in touch</a>
+        <h2 class="contact-cta__title">Let’s work together.</h2>
+        <p class="contact-cta__text">Available for selected commissions and collaborations.</p>
+        <a class="button button--accent" href="contact.html">Get in touch</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> <span data-brand>16:01 Studio</span>. All rights reserved. <span data-content="footerDescription"></span></p>
-      <div class="site-social-links" data-site-social-links></div>
+      <p>&copy; <span id="year"></span> <span>16:01 Studio</span>. All rights reserved. <span></span></p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html">Home</a><a href="work.html">Work</a>
+        <a href="about.html">Studio</a><a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
   </footer>
 
-  <script src="data/projects.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

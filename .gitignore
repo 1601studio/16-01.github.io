@@ -1,6 +1,7 @@
 # Private local project catalog and artwork are never part of the public site.
 /data/projects.js
 /js/supabase-runtime-config.js
+/admin/js/supabase-runtime-config.js
 /assets/images/projects/
 /assets/projects/
 /assets/images/client-work/

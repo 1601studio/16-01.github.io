@@ -10,6 +10,11 @@ const root = path.resolve(__dirname, "..");
 const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"]);
 const primaryCategories = new Set(["Branding", "Illustration", "Typography"]);
 const secondaryCategories = new Set(["Poster Design", "Merchandise", "Editorial Design"]);
+const generatedConfigReferences = new Set([
+  "contact.html:js/supabase-runtime-config.js",
+  "admin/login.html:js/supabase-runtime-config.js",
+  "admin/dashboard.html:js/supabase-runtime-config.js"
+]);
 const errors = [];
 const warnings = [];
 const referencedImages = new Set();
@@ -211,7 +216,7 @@ const inspectHtml = (htmlPath) => {
     let targetPath = path.resolve(path.dirname(htmlPath), cleanPath || path.basename(htmlPath));
     if (fs.existsSync(targetPath) && fs.statSync(targetPath).isDirectory()) targetPath = path.join(targetPath, "index.html");
     if (!fs.existsSync(targetPath) || !fs.statSync(targetPath).isFile()) {
-      if (relativeHtml === "contact.html" && value === "js/supabase-runtime-config.js") continue;
+      if (generatedConfigReferences.has(`${relativeHtml}:${value}`)) continue;
       addError(`${relativeHtml}: broken local ${reference.attribute} reference "${value}".`);
       continue;
     }

@@ -89,6 +89,41 @@ reads or writes Supabase data or Storage, define its schema and access needs,
 then implement and verify least-privilege Row Level Security policies before
 enabling browser access.
 
+## Admin CMS foundation
+
+The separate `admin/` area contains an email/password login and a dashboard
+foundation. Both pages use `admin/js/supabase-runtime-config.js`, generated
+from the project's Supabase URL and public key. This admin runtime file is
+intentionally ignored by Git and is not included in a fresh local checkout.
+For local testing, set the existing public repository variables in your
+shell and generate the ignored runtime file before starting the local server:
+
+```bash
+SUPABASE_URL="https://your-project.supabase.co" \
+SUPABASE_PUBLISHABLE_KEY="your-public-publishable-key" \
+node scripts/generate-supabase-config.js
+SUPABASE_URL="https://your-project.supabase.co" \
+SUPABASE_PUBLISHABLE_KEY="your-public-publishable-key" \
+node scripts/generate-admin-supabase-config.js
+python3 -m http.server 8000
+```
+
+Then visit `http://127.0.0.1:8000/admin/login.html`. Use an existing Supabase
+Auth account whose matching `public.studio_staff` row has `id` equal to the
+Auth user ID, `is_active = true`, and `role = 'admin'`. The browser verifies
+that row after sign-in; the dashboard does not create accounts or change
+database policies. Its staff lookup must be permitted by the existing RLS
+policies. No service-role key belongs in this site or in repository variables.
+
+The dashboard's project count, media library, and staff management are
+intentionally placeholders. GitHub Pages serves static files, so the login
+screen is a client-side access gate, not protection for the page source itself;
+data access must remain protected by Supabase Auth and existing RLS policies.
+The deployment workflow generates a separate ignored admin runtime config
+from the same repository variables. The admin generator accepts either a
+publishable key or a legacy anon key; the existing public-site generator
+continues to require a publishable key.
+
 ## Accessibility
 
 - Semantic HTML and keyboard-accessible project cards and filters

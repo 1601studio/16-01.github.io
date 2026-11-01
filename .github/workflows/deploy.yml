@@ -33,6 +33,12 @@ jobs:
           SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
         run: node scripts/generate-supabase-config.js
 
+      - name: Generate admin runtime configuration
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: node scripts/generate-admin-supabase-config.js
+
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:

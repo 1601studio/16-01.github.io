@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111310" />
+  <title>Dashboard — 16:01 Studio</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="dashboard-page">
+  <div id="dashboard-loading" class="page-loading" role="status">Verifying studio access…</div>
+
+  <div id="dashboard-app" class="dashboard-layout" hidden>
+    <aside class="sidebar">
+      <a class="wordmark sidebar-wordmark" href="../index.html" aria-label="16:01 Studio home">
+        16:01 <span>Studio</span>
+      </a>
+      <p class="sidebar-label">Workspace</p>
+      <nav class="sidebar-nav" aria-label="Admin navigation">
+        <a class="sidebar-link is-active" href="#overview" aria-current="page">Overview</a>
+        <a class="sidebar-link" href="#projects">Projects</a>
+        <a class="sidebar-link" href="#media">Media library</a>
+        <a class="sidebar-link" href="#staff">Staff management</a>
+      </nav>
+      <a class="public-site-link" href="../index.html">← View public site</a>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">16:01 Studio · Admin</p>
+          <h1>Overview</h1>
+        </div>
+        <div class="identity">
+          <div class="identity-copy">
+            <span id="admin-email" class="identity-email"></span>
+            <span id="admin-role" class="identity-role"></span>
+          </div>
+          <button id="logout-button" class="button button--quiet" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <p id="dashboard-message" class="dashboard-message" role="status" aria-live="polite"></p>
+
+      <section id="overview" class="overview-section" aria-labelledby="welcome-title">
+        <p class="eyebrow">Your workspace</p>
+        <h2 id="welcome-title">Good to have you back.</h2>
+        <p class="section-description">A quiet place to manage the studio’s digital presence.</p>
+      </section>
+
+      <section class="summary-grid" aria-label="Studio overview">
+        <article id="projects" class="summary-card">
+          <p class="card-label">Projects</p>
+          <p class="card-value">—</p>
+          <p class="card-note">Project management will be available in a future phase.</p>
+        </article>
+        <article id="media" class="summary-card summary-card--quiet">
+          <p class="card-label">Media library</p>
+          <p class="card-value card-value--text">Coming later</p>
+          <p class="card-note">Media browsing and uploads are not enabled.</p>
+        </article>
+        <article id="staff" class="summary-card summary-card--quiet">
+          <p class="card-label">Staff management</p>
+          <p class="card-value card-value--text">Coming later</p>
+          <p class="card-note">Staff accounts can’t be created from this dashboard.</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/supabase-runtime-config.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

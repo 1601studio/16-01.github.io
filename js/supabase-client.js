@@ -1,11 +1,18 @@
-const initializeSupabase = async () => {
+let clientPromise;
+
+export function getSupabaseClient() {
+  if (!clientPromise) clientPromise = initializeSupabase();
+  return clientPromise;
+}
+
+async function initializeSupabase() {
   const url = window.SUPABASE_URL;
   const publishableKey = window.SUPABASE_PUBLISHABLE_KEY;
 
   if (
     (url === undefined && publishableKey === undefined) ||
     (url === "" && publishableKey === "")
-  ) return;
+  ) return null;
   if (typeof url !== "string" || typeof publishableKey !== "string") {
     throw new Error("SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY must both be configured.");
   }
@@ -18,15 +25,17 @@ const initializeSupabase = async () => {
   const { createClient } = await import(
     "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/+esm"
   );
-  window.supabaseClient = createClient(url, publishableKey, {
+  const client = createClient(url, publishableKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
       detectSessionInUrl: false
     }
   });
-};
+  window.supabaseClient = client;
+  return client;
+}
 
-initializeSupabase().catch((error) => {
+getSupabaseClient().catch((error) => {
   console.error("Unable to initialize the Supabase client.", error);
 });

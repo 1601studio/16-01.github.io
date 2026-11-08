@@ -1,4 +1,5 @@
 import {
+  DEFAULT_PALETTE,
   FONT_SEEDS,
   createId,
   escapeHtml,
@@ -9,6 +10,7 @@ import {
   slugify,
   writeStore,
 } from "./cms-storage.js";
+import { getSupabaseClient } from "./supabase-config.js";
 
 const TITLES = {
   overview: "Overview",
@@ -34,6 +36,8 @@ let query = "";
 let projectMode = "grid";
 let toastTimeout;
 let adminAccess;
+let sharedPalette = { ...DEFAULT_PALETTE };
+let sharedPaletteError = "";
 
 const safeImage = (source) => {
   if (typeof source !== "string" || !source.trim()) return "";
@@ -241,7 +245,6 @@ function renderFonts() {
 }
 
 function renderColors() {
-  const store = getStore();
   const labels = {
     background: "Primary background",
     secondaryBackground: "Secondary background",
@@ -253,9 +256,15 @@ function renderColors() {
     secondaryText: "Secondary text",
     border: "Borders & dividers",
   };
-  document.querySelector("#view-colors").innerHTML = `${pageHeader("Website colors", "Build a custom site palette and preview it before saving.")}<div class="color-workspace panel"><div class="panel-heading"><div><p class="eyebrow">LIVE WEBSITE PREVIEW</p><h3>See the palette in context</h3></div><a class="text-button" href="../index.html" target="_blank" rel="noopener noreferrer">Open website ↗</a></div><iframe id="website-color-live-preview" title="Live preview of the public website colors" src="../index.html"></iframe><div class="palette-fields">${Object.entries(labels).map(([key, label]) => `<label class="color-field"><span><i data-swatch="${key}" style="--swatch:${escapeHtml(store.palette[key])}"></i>${escapeHtml(label)}</span><input type="color" value="${escapeHtml(store.palette[key])}" data-palette-color="${key}" /></label>`).join("")}</div><div class="form-actions"><span class="local-data-note">Changes are browser-local and do not publish.</span><button class="button button--primary" type="button" data-action="save-palette">Save custom colors</button></div></div>`;
+  const status = sharedPaletteError
+    ? `<p class="local-data-note" role="alert">${escapeHtml(sharedPaletteError)}</p>`
+    : '<p class="local-data-note">Unsaved edits preview here. Saving publishes these colors for all devices.</p>';
+  document.querySelector("#view-colors").innerHTML = `${pageHeader("Website colors", "Preview and publish a shared site palette.")}<div class="color-workspace panel"><div class="panel-heading"><div><p class="eyebrow">LIVE WEBSITE PREVIEW</p><h3>See the palette in context</h3></div><a class="text-button" href="../index.html" target="_blank" rel="noopener noreferrer">Open website ↗</a></div><iframe id="website-color-live-preview" title="Live preview of the public website colors" src="../index.html"></iframe><div class="palette-fields">${Object.entries(labels).map(([key, label]) => `<label class="color-field"><span><i data-swatch="${key}" style="--swatch:${escapeHtml(sharedPalette[key])}"></i>${escapeHtml(label)}</span><input type="color" value="${escapeHtml(sharedPalette[key])}" data-palette-color="${key}" /></label>`).join("")}</div>${status}<div class="form-actions"><button class="button button--primary" type="button" data-action="save-palette">Save colors for all devices</button></div></div>`;
   const frame = document.querySelector("#website-color-live-preview");
-  frame.addEventListener("load", () => sendPalette(store.palette));
+  frame.addEventListener("load", () => {
+    const palette = Object.fromEntries([...document.querySelectorAll("[data-palette-color]")].map((field) => [field.dataset.paletteColor, field.value]));
+    sendPalette(palette);
+  });
   document.querySelectorAll("[data-palette-color]").forEach((input) => input.addEventListener("input", (event) => {
     const swatch = document.querySelector(`[data-swatch="${event.currentTarget.dataset.paletteColor}"]`);
     swatch.style.setProperty("--swatch", event.currentTarget.value);
@@ -523,10 +532,9 @@ function sendPalette(palette) {
   frame.contentWindow.postMessage({ type: "1601-admin-color-preview", palette }, window.location.origin);
 }
 
-function savePalette() {
-  const store = getStore();
+async function savePalette(button) {
   const palette = {};
-  for (const [key, value] of Object.entries(store.palette)) {
+  for (const [key, value] of Object.entries(DEFAULT_PALETTE)) {
     const input = document.querySelector(`[data-palette-color="${key}"]`);
     if (!input || !isValidColor(input.value)) {
       notify("Choose a valid color for every field.", true);
@@ -534,7 +542,29 @@ function savePalette() {
     }
     palette[key] = input.value.toUpperCase();
   }
-  if (commit({ ...store, palette }, "Saved custom website colors")) notify("Custom website colors saved in this browser.");
+  button.disabled = true;
+  try {
+    const client = await getSupabaseClient();
+    if (!client) throw new Error("Supabase is not configured for shared website colors.");
+    const { error } = await client
+      .from("studio_site_settings")
+      .upsert({
+        setting_key: "colors",
+        setting_value: palette,
+        updated_at: new Date().toISOString(),
+        updated_by: adminAccess.user.id,
+      }, { onConflict: "setting_key" });
+    if (error) throw new Error("Unable to publish website colors.", { cause: error });
+    sharedPalette = palette;
+    sharedPaletteError = "";
+    renderColors();
+    notify("Website colors published for all devices.");
+  } catch (error) {
+    console.error("Publishing website colors failed.", error);
+    notify(error.message || "Unable to publish website colors.", true);
+  } finally {
+    button.disabled = false;
+  }
 }
 
 function deleteById(collection, id, label) {
@@ -666,7 +696,7 @@ function handleAction(button) {
   if (action === "delete-font") deleteById("fonts", id, "font");
   if (action === "delete-media") deleteById("media", id, "image");
   if (action === "copy-media") copyMediaPath(id);
-  if (action === "save-palette") savePalette();
+  if (action === "save-palette") void savePalette(button);
   if (action === "toggle-message") {
     const messages = store.messages || [];
     commit({ ...store, messages: messages.map((message) => message.id === id ? { ...message, read: !message.read } : message) }, "Updated demo message read state");
@@ -701,15 +731,39 @@ export async function mountDashboard(access) {
   currentDate.textContent = new Intl.DateTimeFormat(undefined, { weekday: "short", month: "short", day: "numeric" }).format(today);
   try {
     readStore();
-    document.querySelector("#dashboard-loading").hidden = true;
-    app.hidden = false;
-    renderAll();
-    setPrimaryAction();
   } catch (error) {
     document.querySelector("#dashboard-loading").hidden = true;
     app.hidden = false;
     notify(error.message, true);
+    return;
   }
+
+  try {
+    const client = await getSupabaseClient();
+    if (!client) throw new Error("Supabase is not configured for shared website colors.");
+    const { data, error } = await client
+      .from("studio_site_settings")
+      .select("setting_value")
+      .eq("setting_key", "colors")
+      .maybeSingle();
+    if (error) throw new Error("Unable to load the shared website colors.", { cause: error });
+    if (!data || Object.keys(DEFAULT_PALETTE).some((key) => !isValidColor(data.setting_value?.[key]))) {
+      throw new Error("The shared website colors are missing or invalid. Apply the Supabase colors migration from README.md.");
+    }
+    sharedPalette = Object.fromEntries(
+      Object.keys(DEFAULT_PALETTE).map((key) => [key, data.setting_value[key].toUpperCase()])
+    );
+    sharedPaletteError = "";
+  } catch (error) {
+    sharedPaletteError = error.message || "Unable to load the shared website colors.";
+    console.error("Loading shared website colors failed.", error);
+    notify(sharedPaletteError, true);
+  }
+
+  document.querySelector("#dashboard-loading").hidden = true;
+  app.hidden = false;
+  renderAll();
+  setPrimaryAction();
 
   document.querySelector(".sidebar-nav").addEventListener("click", (event) => {
     const button = event.target.closest("[data-section]");

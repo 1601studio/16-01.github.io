@@ -11,7 +11,13 @@ const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg
 const primaryCategories = new Set(["Branding", "Illustration", "Typography"]);
 const secondaryCategories = new Set(["Poster Design", "Merchandise", "Editorial Design"]);
 const generatedConfigReferences = new Set([
+  "404.html:js/supabase-runtime-config.js",
+  "index.html:js/supabase-runtime-config.js",
+  "work.html:js/supabase-runtime-config.js",
+  "about.html:js/supabase-runtime-config.js",
+  "services.html:js/supabase-runtime-config.js",
   "contact.html:js/supabase-runtime-config.js",
+  "projects/case-study.html:../js/supabase-runtime-config.js",
   "admin/login.html:js/supabase-runtime-config.js",
   "admin/dashboard.html:js/supabase-runtime-config.js"
 ]);

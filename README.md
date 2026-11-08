@@ -89,11 +89,29 @@ reads or writes Supabase data or Storage, define its schema and access needs,
 then implement and verify least-privilege Row Level Security policies before
 enabling browser access.
 
+### Shared website colors
+
+The admin color editor publishes the palette to all devices in the existing
+`public.studio_site_settings` table's `setting_key = 'colors'` row. Before using
+it, run
+[`supabase/migrations/20261108000000_shared_site_palette.sql`](supabase/migrations/20261108000000_shared_site_palette.sql)
+in the Supabase SQL Editor. The migration permits public read access to the
+existing settings and replaces the staff insert/update policies with policies
+that restrict writes to active admins in `public.studio_staff`. It preserves
+the current colors row. Do not add a secret or service-role key to the website.
+
+Once the migration is applied and the site is deployed with its Supabase
+repository variables, admins can save colors in Website colors. The public
+site reads the published palette on page load; refresh already-open pages to
+see a newly saved palette. If the table or its policies are unavailable, the
+site keeps its default CSS colors and the dashboard reports the error.
+
 ## Admin dashboard
 
 The separate `admin/` area contains an email/password login and a
 browser-local CMS workspace for projects and drafts, categories, media,
-services, fonts, custom website colors, and website settings. Both pages use
+services, fonts, and website settings; custom website colors are shared through
+Supabase as described above. Both pages use
 `admin/js/supabase-runtime-config.js`, generated from the project's Supabase
 URL and public key. This admin runtime file is intentionally ignored by Git
 and is not included in a fresh local checkout.
@@ -117,10 +135,11 @@ that row after sign-in; the dashboard does not create accounts or change
 database policies. Its staff lookup must be permitted by the existing RLS
 policies. No service-role key belongs in this site or in repository variables.
 
-CMS edits are stored in the browser's `localStorage` under
+Most CMS edits are stored in the browser's `localStorage` under
 `1601-admin-dashboard-v1`. They are local previews only: they do not update
 `data/`, Supabase, GitHub, or the live website, and clearing browser data
-removes them. Repository image assets are read-only; uploaded images are
+removes them. Website colors are the exception and are published to the
+shared palette table. Repository image assets are read-only; uploaded images are
 browser-local and limited to 250 KB each. The dashboard cannot receive contact
 form submissions because the public form has no backend; its inbox is shown as
 unavailable rather than a real message feed. Staff access is read-only and

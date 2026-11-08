@@ -303,19 +303,7 @@ function renderCaseStudy() {
   }
 }
 
-const ADMIN_PALETTE_DEFAULTS = {
-  background: "#111310",
-  secondaryBackground: "#171914",
-  card: "#191B17",
-  accent: "#C64B35",
-  headingText: "#F5F2EB",
-  boxText: "#B0ADA5",
-  text: "#F5F2EB",
-  secondaryText: "#B0ADA5",
-  border: "#34352F",
-};
-
-const applyDashboardPreview = (palette) => {
+const applyPalette = (palette) => {
   if (!palette || typeof palette !== "object") return;
   const keys = {
     background: "--color-background",
@@ -346,21 +334,51 @@ const applyDashboardTypography = (fonts) => {
   if (validStack(body)) rootStyle.setProperty("--font-sans", body.stack);
 };
 
+let dashboardPreviewActive = false;
+
 const readDashboardPreview = () => {
   try {
     const stored = JSON.parse(localStorage.getItem("1601-admin-dashboard-v1") || "null");
     if (!stored || stored.version !== 1) return;
-    const palette = { ...ADMIN_PALETTE_DEFAULTS, ...(stored.palette || {}) };
-    applyDashboardPreview(palette);
     applyDashboardTypography(stored.fonts);
   } catch (error) {
     console.warn("Could not read the local dashboard website preview.", error);
   }
 };
 
+const loadPublishedPalette = async () => {
+  const { getSupabaseClient } = await import("./supabase-client.js");
+  const client = await getSupabaseClient();
+  if (!client) return;
+
+  const { data, error } = await client
+    .from("studio_site_settings")
+    .select("palette")
+    .eq("id", "palette")
+    .maybeSingle();
+  if (error) throw new Error("Unable to load the published website colors.", { cause: error });
+
+  const keys = [
+    "background",
+    "secondaryBackground",
+    "card",
+    "accent",
+    "headingText",
+    "boxText",
+    "text",
+    "secondaryText",
+    "border",
+  ];
+  if (!data || keys.some((key) => !/^#[\da-f]{6}$/i.test(data.palette?.[key] || ""))) {
+    throw new Error("The shared website palette is missing or invalid.");
+  }
+  if (!dashboardPreviewActive) applyPalette(data.palette);
+};
+
 window.addEventListener("message", (event) => {
   if (event.origin !== window.location.origin || event.data?.type !== "1601-admin-color-preview") return;
-  applyDashboardPreview(event.data.palette);
+  dashboardPreviewActive = true;
+  applyPalette(event.data.palette);
 });
 
 window.addEventListener("storage", (event) => {
@@ -370,6 +388,9 @@ window.addEventListener("storage", (event) => {
 /* ── Initialisation ────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
   readDashboardPreview();
+  loadPublishedPalette().catch((error) => {
+    console.error("Loading published website colors failed.", error);
+  });
 
   /* Current year in every footer. */
   const yearEl = document.getElementById("year");

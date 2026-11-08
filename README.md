@@ -91,12 +91,14 @@ enabling browser access.
 
 ### Shared website colors
 
-The admin color editor publishes the palette to all devices through the
-`public.studio_site_settings` Supabase table. Before using it, run
+The admin color editor publishes the palette to all devices in the existing
+`public.studio_site_settings` table's `setting_key = 'colors'` row. Before using
+it, run
 [`supabase/migrations/20261108000000_shared_site_palette.sql`](supabase/migrations/20261108000000_shared_site_palette.sql)
 in the Supabase SQL Editor. The migration permits public read access to the
-single palette row and restricts writes to active admins in `public.studio_staff`.
-Do not add a secret or service-role key to the website.
+existing settings and replaces the staff insert/update policies with policies
+that restrict writes to active admins in `public.studio_staff`. It preserves
+the current colors row. Do not add a secret or service-role key to the website.
 
 Once the migration is applied and the site is deployed with its Supabase
 repository variables, admins can save colors in Website colors. The public

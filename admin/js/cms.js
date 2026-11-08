@@ -548,7 +548,12 @@ async function savePalette(button) {
     if (!client) throw new Error("Supabase is not configured for shared website colors.");
     const { error } = await client
       .from("studio_site_settings")
-      .upsert({ id: "palette", palette, updated_at: new Date().toISOString() }, { onConflict: "id" });
+      .upsert({
+        setting_key: "colors",
+        setting_value: palette,
+        updated_at: new Date().toISOString(),
+        updated_by: adminAccess.user.id,
+      }, { onConflict: "setting_key" });
     if (error) throw new Error("Unable to publish website colors.", { cause: error });
     sharedPalette = palette;
     sharedPaletteError = "";
@@ -738,15 +743,15 @@ export async function mountDashboard(access) {
     if (!client) throw new Error("Supabase is not configured for shared website colors.");
     const { data, error } = await client
       .from("studio_site_settings")
-      .select("palette")
-      .eq("id", "palette")
+      .select("setting_value")
+      .eq("setting_key", "colors")
       .maybeSingle();
     if (error) throw new Error("Unable to load the shared website colors.", { cause: error });
-    if (!data || Object.keys(DEFAULT_PALETTE).some((key) => !isValidColor(data.palette?.[key]))) {
-      throw new Error("The shared website palette is missing or invalid. Apply the Supabase palette migration from README.md.");
+    if (!data || Object.keys(DEFAULT_PALETTE).some((key) => !isValidColor(data.setting_value?.[key]))) {
+      throw new Error("The shared website colors are missing or invalid. Apply the Supabase colors migration from README.md.");
     }
     sharedPalette = Object.fromEntries(
-      Object.keys(DEFAULT_PALETTE).map((key) => [key, data.palette[key].toUpperCase()])
+      Object.keys(DEFAULT_PALETTE).map((key) => [key, data.setting_value[key].toUpperCase()])
     );
     sharedPaletteError = "";
   } catch (error) {

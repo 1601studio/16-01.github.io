@@ -1,28 +1,17 @@
-create table if not exists public.studio_site_settings (
-  id text primary key check (id = 'palette'),
-  palette jsonb not null check (jsonb_typeof(palette) = 'object'),
-  updated_at timestamptz not null default now()
-);
-
 alter table public.studio_site_settings enable row level security;
 
 grant select on public.studio_site_settings to anon, authenticated;
 grant insert, update on public.studio_site_settings to authenticated;
 
-drop policy if exists "Public can read the website palette" on public.studio_site_settings;
-create policy "Public can read the website palette"
-  on public.studio_site_settings
-  for select
-  to anon, authenticated
-  using (id = 'palette');
-
-drop policy if exists "Active studio admins can insert the website palette" on public.studio_site_settings;
-create policy "Active studio admins can insert the website palette"
+drop policy if exists studio_settings_staff_insert on public.studio_site_settings;
+drop policy if exists studio_settings_staff_update on public.studio_site_settings;
+drop policy if exists studio_settings_admin_insert on public.studio_site_settings;
+create policy studio_settings_admin_insert
   on public.studio_site_settings
   for insert
   to authenticated
   with check (
-    id = 'palette'
+    updated_by = auth.uid()
     and exists (
       select 1
       from public.studio_staff
@@ -32,14 +21,13 @@ create policy "Active studio admins can insert the website palette"
     )
   );
 
-drop policy if exists "Active studio admins can update the website palette" on public.studio_site_settings;
-create policy "Active studio admins can update the website palette"
+drop policy if exists studio_settings_admin_update on public.studio_site_settings;
+create policy studio_settings_admin_update
   on public.studio_site_settings
   for update
   to authenticated
   using (
-    id = 'palette'
-    and exists (
+    exists (
       select 1
       from public.studio_staff
       where studio_staff.id = auth.uid()
@@ -48,7 +36,7 @@ create policy "Active studio admins can update the website palette"
     )
   )
   with check (
-    id = 'palette'
+    updated_by = auth.uid()
     and exists (
       select 1
       from public.studio_staff
@@ -58,9 +46,9 @@ create policy "Active studio admins can update the website palette"
     )
   );
 
-insert into public.studio_site_settings (id, palette)
+insert into public.studio_site_settings (setting_key, setting_value)
 values (
-  'palette',
+  'colors',
   '{
     "background": "#111310",
     "secondaryBackground": "#171914",
@@ -73,4 +61,4 @@ values (
     "border": "#34352F"
   }'::jsonb
 )
-on conflict (id) do nothing;
+on conflict (setting_key) do nothing;

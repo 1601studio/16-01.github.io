@@ -353,8 +353,8 @@ const loadPublishedPalette = async () => {
 
   const { data, error } = await client
     .from("studio_site_settings")
-    .select("palette")
-    .eq("id", "palette")
+    .select("setting_value")
+    .eq("setting_key", "colors")
     .maybeSingle();
   if (error) throw new Error("Unable to load the published website colors.", { cause: error });
 
@@ -369,10 +369,10 @@ const loadPublishedPalette = async () => {
     "secondaryText",
     "border",
   ];
-  if (!data || keys.some((key) => !/^#[\da-f]{6}$/i.test(data.palette?.[key] || ""))) {
+  if (!data || keys.some((key) => !/^#[\da-f]{6}$/i.test(data.setting_value?.[key] || ""))) {
     throw new Error("The shared website palette is missing or invalid.");
   }
-  if (!dashboardPreviewActive) applyPalette(data.palette);
+  if (!dashboardPreviewActive) applyPalette(data.setting_value);
 };
 
 window.addEventListener("message", (event) => {
